@@ -1,0 +1,15 @@
+{
+  "verbose": true,
+  "ignore": [
+    "dist/*",
+    "node_modules/*",
+    "src/client/*"
+  ],
+  "watch": [
+    "src/server/*"
+  ],
+  "execMap": {
+    "js": "npm run lint:server && node --harmony"
+  },
+  "ext": "js json"
+}
