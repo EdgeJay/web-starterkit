@@ -5,7 +5,10 @@ const webpack = require('webpack');
 const clientConfig = {
   target: 'web',
   entry: {
-    signup: './src/client/signup.js',
+    signup: [
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+      './src/client/signup.js',
+    ],
   },
   output: {
     path: path.resolve(__dirname, './dist/assets/js/'),
@@ -31,7 +34,9 @@ const clientConfig = {
           presets: [
             ['env', {
               targets: {
-                node: 'current',
+                browsers: [
+                  'last 2 versions',
+                ],
               },
             }],
             'react',
@@ -46,6 +51,9 @@ const clientConfig = {
   },
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
   ],
 };
 
