@@ -1,11 +1,13 @@
 import Koa from 'koa';
-import { initRoutes } from './routes';
 import { initViews } from './views';
+import { initWebpack } from './webpack';
+import { initRoutes } from './routes';
 
 const port = process.env.NODE_PORT;
 const app = new Koa();
 
 initViews(app);
+initWebpack(app);
 initRoutes(app);
 
 app.listen(port, () => {

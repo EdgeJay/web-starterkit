@@ -8,8 +8,9 @@ const clientConfig = {
     signup: './src/client/signup.js',
   },
   output: {
-    path: path.resolve(__dirname, './dist/client'),
+    path: path.resolve(__dirname, './dist/assets/js/'),
     filename: '[name].js',
+    publicPath: '/assets/js/',
   },
   module: {
     rules: [{

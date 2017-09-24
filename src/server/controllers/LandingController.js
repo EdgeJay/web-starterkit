@@ -5,5 +5,6 @@ export default class LandingController {
 
   static async getHello(ctx) {
     ctx.body = 'Hello!';
+    ctx.type = 'html';
   }
 }
