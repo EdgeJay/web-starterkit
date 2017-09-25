@@ -49,6 +49,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
+    "file-loader": "^0.11.2",
     "koa-webpack-middleware": "^1.0.7",
     "nodemon": "^1.12.1",
     "webpack": "^3.6.0",
