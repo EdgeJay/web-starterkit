@@ -5,15 +5,15 @@ const webpack = require('webpack');
 const clientConfig = {
   target: 'web',
   entry: {
-    signup: [
+    main: [
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-      './src/client/signup.js',
+      './src/client/main.js',
     ],
   },
   output: {
-    path: path.resolve(__dirname, './dist/assets/js/'),
-    filename: '[name].js',
-    publicPath: '/assets/js/',
+    path: path.resolve(__dirname, './dist/assets/'),
+    filename: 'js/[name].js',
+    publicPath: '/assets/',
   },
   module: {
     rules: [{
@@ -47,6 +47,14 @@ const clientConfig = {
           ],
         },
       }
+    }, {
+      test: /\.(png|jpg|jpeg|svg|gif)$/,
+      use: {
+        loader: 'file-loader',
+        options: {
+          name: 'img/[name].[ext]',
+        },
+      },
     }]
   },
   plugins: [
