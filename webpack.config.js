@@ -46,6 +46,8 @@ const clientConfig = {
           plugins: [
             'transform-react-jsx',
             'transform-runtime',
+            'transform-es2015-spread',
+            'transform-object-rest-spread',
             'react-hot-loader/babel',
           ],
         },

@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import reducers from './reducers';
 import Hello from './components/Hello';
+
+console.log(reducers);
 
 const render = (Component) => {
   ReactDOM.render(
