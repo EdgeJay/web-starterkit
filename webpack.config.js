@@ -7,6 +7,7 @@ const clientConfig = {
   entry: {
     main: [
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+      'react-hot-loader/patch',
       './src/client/main.js',
     ],
   },
@@ -38,12 +39,14 @@ const clientConfig = {
                   'last 2 versions',
                 ],
               },
+              modules: false,
             }],
             'react',
           ],
           plugins: [
             'transform-react-jsx',
             'transform-runtime',
+            'react-hot-loader/babel',
           ],
         },
       }
