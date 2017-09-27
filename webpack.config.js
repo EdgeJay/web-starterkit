@@ -5,10 +5,10 @@ const webpack = require('webpack');
 const clientConfig = {
   target: 'web',
   entry: {
-    main: [
+    app: [
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
       'react-hot-loader/patch',
-      './src/client/main.js',
+      './src/client/App.js',
     ],
   },
   output: {

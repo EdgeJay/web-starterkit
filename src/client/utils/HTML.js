@@ -15,7 +15,7 @@ const HTML = ({ content, store }) => (
     <body>
       <div id="mount" dangerouslySetInnerHTML={{ __html: content }} />
       <script dangerouslySetInnerHTML={{ __html: `window.__preload__ = ${serialize(store.getState())};` }} />
-      <script src="/assets/js/main.js"></script>
+      <script src="/assets/js/app.js"></script>
     </body>
   </html>
 );

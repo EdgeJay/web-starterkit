@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { AppContainer } from 'react-hot-loader';
 import routes from './routes';
 import { configureStore } from './stores';
 
@@ -9,10 +11,20 @@ import { configureStore } from './stores';
 const store = configureStore(browserHistory, window['__preload__']);
 const history = syncHistoryWithStore(browserHistory, store);
 
-const App = () => (
-  <Provider store={store}>
-    <Router history={history} routes={routes} />
-  </Provider>
-);
+const render = () => {
+  ReactDOM.hydrate(
+    <AppContainer>
+      <Provider store={store}>
+        <Router history={history} routes={routes} />
+      </Provider>
+    </AppContainer>,
+    document.getElementById('mount'));
+};
 
-export default App;
+render();
+
+/*
+if (module.hot) {
+  module.hot.accept('./App', () => render(App));
+}
+*/
