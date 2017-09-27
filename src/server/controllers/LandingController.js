@@ -1,14 +1,38 @@
 import React from 'react';
-import ReactDOM from 'react-dom/server';
-import Hello from '../../client/components/Hello';
+import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
+import { createMemoryHistory, match, RouterContext } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import routes from '../../client/routes';
+import { configureStore } from '../../client/stores';
+import HTML from '../../client/utils/HTML';
 
 export default class LandingController {
   static async getLanding(ctx) {
-    const app = ReactDOM.renderToString(<Hello />);
+    const location = ctx.path;
+    const memoryHistory = createMemoryHistory(location);
+    const store = configureStore(memoryHistory);
+    const history = syncHistoryWithStore(memoryHistory, store);
+    let content = '';
 
-    await ctx.render('index', {
-      app,
+    match({ history, routes, location }, (error, redirectLocation, renderProps) => {
+      if (error) {
+        ctx.status = 500;
+      } else if (redirectLocation) {
+        ctx.redirect(redirectLocation.pathname + redirectLocation.search);
+      } else if (renderProps) {
+        content = renderToString(
+          <Provider store={store}>
+            <RouterContext {...renderProps} />
+          </Provider>,
+        );
+      }
     });
+
+    const app = `<!DOCTYPE html>${renderToString(<HTML content={content} store={store} />)}`;
+    ctx.body = app;
+    ctx.type = 'html';
+    ctx.status = 200;
   }
 
   static async getHello(ctx) {
