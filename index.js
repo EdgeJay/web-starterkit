@@ -10,6 +10,8 @@ require('babel-register')({
   ],
   plugins: [
     'transform-react-jsx',
+    'transform-es2015-spread',
+    'transform-object-rest-spread',
   ],
 });
 
