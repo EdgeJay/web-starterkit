@@ -1,21 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import reducers from './reducers';
-import Hello from './components/Hello';
-
-console.log(reducers);
+import App from './App';
 
 const render = (Component) => {
-  ReactDOM.render(
+  ReactDOM.hydrate(
     <AppContainer>
       <Component />
     </AppContainer>,
     document.getElementById('mount'));
 };
 
-render(Hello);
+render(App);
 
 if (module.hot) {
-  module.hot.accept('./components/Hello', () => render(Hello));
+  module.hot.accept('./App', () => render(App));
 }
