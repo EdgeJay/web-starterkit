@@ -1,5 +1,5 @@
 const initialState = {
-  title: '',
+  title: 'Welcome to Web Signup Boilerplate',
 };
 
 const reducers = {
