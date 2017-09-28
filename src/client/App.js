@@ -1,30 +1,39 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { Router } from 'react-router';
 import { AppContainer } from 'react-hot-loader';
-import routes from './routes';
-import { configureStore } from './stores';
 
-// eslint-disable-next-line dot-notation
-const store = configureStore(browserHistory, window['__preload__']);
-const history = syncHistoryWithStore(browserHistory, store);
+const App = props => (
+  <AppContainer>
+    <Provider store={props.store}>
+      <Router history={props.history} routes={props.routes} />
+    </Provider>
+  </AppContainer>
+);
 
-const render = () => {
-  ReactDOM.hydrate(
-    <AppContainer>
-      <Provider store={store}>
-        <Router history={history} routes={routes} />
-      </Provider>
-    </AppContainer>,
-    document.getElementById('mount'));
+App.propTypes = {
+  store: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ]).isRequired,
+  history: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ]).isRequired,
+  routes: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ]).isRequired,
 };
 
-render();
-
-/*
-if (module.hot) {
-  module.hot.accept('./App', () => render(App));
-}
-*/
+export default App;

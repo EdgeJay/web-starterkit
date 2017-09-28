@@ -6,7 +6,7 @@ import * as actions from '../actions/signup';
 
 class Hello extends React.PureComponent {
   render() {
-    return <p style={{ fontSize: '2.1rem' }}>{this.props.store.title}</p>;
+    return <p style={{ fontSize: '2.0rem' }}>{this.props.store.title}</p>;
   }
 }
 

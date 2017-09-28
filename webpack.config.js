@@ -8,7 +8,7 @@ const clientConfig = {
     app: [
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
       'react-hot-loader/patch',
-      './src/client/App.js',
+      './src/client/AppWrapper.js',
     ],
   },
   output: {
