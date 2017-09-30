@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActions, mapStateToProps } from '../stores';
-import * as actions from '../actions/signup';
+import * as actions from '../actions/main';
 
 class Hello extends React.PureComponent {
   render() {
@@ -11,6 +11,11 @@ class Hello extends React.PureComponent {
 }
 
 Hello.propTypes = {
+  // eslint-disable-next-line
+  actions: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.func,
+  ]).isRequired,
   store: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.string,
@@ -20,4 +25,4 @@ Hello.propTypes = {
   ]).isRequired,
 };
 
-export default connect(mapStateToProps('signup'), bindActions(actions))(Hello);
+export default connect(mapStateToProps('main'), bindActions(actions))(Hello);

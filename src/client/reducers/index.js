@@ -1,7 +1,7 @@
-import signup from './signup';
+import main from './main';
 
 const reducers = {
-  signup,
+  main,
 };
 
 export default reducers;

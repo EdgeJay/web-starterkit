@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router';
-import Hello from './components/Hello';
+import Main from './components/Main';
 
 export default function renderRoutes() {
   return (
-    <Route path="/" component={Hello} />
+    <Route path="/" component={Main} />
   );
 }
