@@ -16,7 +16,7 @@ const NavMenu = styled.ul`
 `;
 
 const NavItem = styled.li`
-  margin: 0;
+  margin: 0 0 1rem 0;
   padding: 0;
 `;
 
@@ -29,7 +29,7 @@ export default class SideMenu extends React.PureComponent {
       key += 1;
       return (
         <NavItem key={key}>
-          <Link to={item.href}>{item.label}</Link>
+          <Link to={item.to}>{item.label}</Link>
         </NavItem>
       );
     });

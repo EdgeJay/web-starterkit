@@ -5,24 +5,44 @@ import { bindActions, mapStateToProps } from '../stores';
 import * as actions from '../actions/main';
 import Page from './Page';
 import SideMenu from './SideMenu';
+import PageContent from './PageContent';
 
 // eslint-disable-next-line
 class Main extends React.PureComponent {
   render() {
     const menu = [{
-      href: '/about',
-      label: 'About This Repo',
+      to: { pathname: '/about' },
+      label: 'About this repo',
+    }, {
+      to: '/libraries',
+      label: 'Libraries',
+    }, {
+      to: '/extend',
+      label: 'How to extend from this repo',
+    }, {
+      to: '/contact',
+      label: 'Contact',
     }];
 
-    return <Page><SideMenu menu={menu} /></Page>;
+    return (
+      <Page>
+        <SideMenu menu={menu} />
+        <PageContent>{this.props.children}</PageContent>
+      </Page>
+    );
   }
 }
+
+Main.defaultProps = {
+  children: [],
+};
 
 Main.propTypes = {
   // eslint-disable-next-line
   actions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   // eslint-disable-next-line
   store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  children: PropTypes.array, // eslint-disable-line react/forbid-prop-types
 };
 
 export default connect(mapStateToProps('main'), bindActions(actions))(Main);

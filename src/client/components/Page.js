@@ -19,11 +19,11 @@ const Page = props => (
 );
 
 Page.defaultProps = {
-  children: null,
+  children: [],
 };
 
 Page.propTypes = {
-  children: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  children: PropTypes.array, // eslint-disable-line react/forbid-prop-types
 };
 
 export default Page;
