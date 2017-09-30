@@ -5,7 +5,7 @@ import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import routes from '../../client/routes';
 import { configureStore } from '../../client/stores';
-import HTML from '../../client/utils/HTML';
+import HTML from '../utils/HTML';
 
 export default class LandingController {
   static async getLanding(ctx) {
