@@ -1,7 +1,7 @@
 {
-  "name": "web-signup-boilerplate",
+  "name": "web-starterkit",
   "version": "0.1.0",
-  "description": "Template project to kickstart new web projects that use HOOQ signup",
+  "description": "Template project to kickstart new web projects",
   "scripts": {
     "dev:server": "nodemon -L",
     "lint:server": "eslint -c ./.eslintrc.js ./index.js \"./src/server/**\"",
@@ -10,10 +10,11 @@
   },
   "keywords": [
     "web",
-    "signup",
-    "signin",
+    "boilerplate",
+    "starter",
     "react",
     "react-fiber",
+    "react16",
     "koa",
     "koa2",
     "milligram",
