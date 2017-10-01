@@ -27,6 +27,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "classnames": "^2.2.5",
     "dotenv": "^4.0.0",
     "dustjs-linkedin": "^2.7.5",
     "koa": "^2.3.0",
