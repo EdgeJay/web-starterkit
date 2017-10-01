@@ -34,7 +34,7 @@ class Main extends React.PureComponent {
 }
 
 Main.defaultProps = {
-  children: [],
+  children: null,
 };
 
 Main.propTypes = {
@@ -42,7 +42,10 @@ Main.propTypes = {
   actions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   // eslint-disable-next-line
   store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  children: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]), // eslint-disable-line react/forbid-prop-types
 };
 
 export default connect(mapStateToProps('main'), bindActions(actions))(Main);

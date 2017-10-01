@@ -14,11 +14,14 @@ const PageContent = props => (
 );
 
 PageContent.defaultProps = {
-  children: [],
+  children: null,
 };
 
 PageContent.propTypes = {
-  children: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]), // eslint-disable-line react/forbid-prop-types
 };
 
 export default PageContent;
