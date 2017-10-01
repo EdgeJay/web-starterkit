@@ -9,7 +9,6 @@ function initRoutes(app) {
   router.get('/libraries', LandingController.getLanding);
   router.get('/extend', LandingController.getLanding);
   router.get('/contact', LandingController.getLanding);
-  router.get('/hello', LandingController.getHello);
 
   app.use(router.routes(), router.allowedMethods());
 }

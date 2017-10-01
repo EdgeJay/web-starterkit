@@ -34,9 +34,4 @@ export default class LandingController {
     ctx.type = 'html';
     ctx.status = 200;
   }
-
-  static async getHello(ctx) {
-    ctx.body = 'Hello!';
-    ctx.type = 'html';
-  }
 }
