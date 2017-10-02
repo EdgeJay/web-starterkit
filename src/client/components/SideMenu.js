@@ -3,28 +3,46 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router';
 import styled from 'styled-components';
 import classNames from 'classnames';
+import media from '../utils/media';
 
 const Nav = styled.nav`
-  position: fixed;
-  z-index: 100;
-  padding: 2rem 0 0 0 !important;
+  margin: 0 -1rem;
+  padding: 0 !important;
   background-color: lightgray;
-  width: 32rem;
-  top: 0;
-  bottom: 0;
-  left: 0;
+
+  ${media.tablet`
+    position: fixed;
+    z-index: 100;
+    margin: 0;
+    padding: 2rem 0 0 0 !important;
+    width: 32rem;
+    top: 0;
+    bottom: 0;
+    left: 0;
+  `}
 `;
 
 const NavMenu = styled.ul`
+  display: block;
   list-style: none;
+  text-align: center;
   margin: 0;
-  padding: 0;
+  padding: 1rem 0 0 0;
+
+  ${media.tablet`
+    text-align: left;
+    padding: 0;
+  `}
 `;
 
 const NavItem = styled.li`
-  display: block;
+  display: inline-block;
   margin: 0;
   padding: 0;
+
+  ${media.tablet`
+    display: block;
+  `}
 `;
 
 const NavLink = styled(Link)`
