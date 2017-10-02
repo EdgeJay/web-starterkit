@@ -1,9 +1,9 @@
 import { css } from 'styled-components';
 
 const sizes = {
-  mobile: '64rem', // 640px
-  tablet: '128rem', // 1280px
-  desktop: '192rem', // 1920px
+  tablet: '40rem', // 400px
+  desktop: '80rem', // 800px
+  tv: '120rem', // 1200px
 };
 
 const media = Object.keys(sizes).reduce((acc, label) => {
