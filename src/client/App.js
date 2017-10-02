@@ -4,13 +4,25 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { AppContainer } from 'react-hot-loader';
 
-const App = props => (
-  <AppContainer>
+const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true');
+
+const App = (props) => {
+  if (enableHMR) {
+    return (
+      <AppContainer>
+        <Provider store={props.store}>
+          <Router history={props.history} routes={props.routes} />
+        </Provider>
+      </AppContainer>
+    );
+  }
+
+  return (
     <Provider store={props.store}>
       <Router history={props.history} routes={props.routes} />
     </Provider>
-  </AppContainer>
-);
+  );
+};
 
 App.propTypes = {
   store: PropTypes.oneOfType([
