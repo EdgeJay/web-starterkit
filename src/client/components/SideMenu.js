@@ -5,9 +5,14 @@ import styled from 'styled-components';
 import classNames from 'classnames';
 
 const Nav = styled.nav`
+  position: fixed;
+  z-index: 100;
   padding: 2rem 0 0 0 !important;
   background-color: lightgray;
-  height: 100%;
+  width: 32rem;
+  top: 0;
+  bottom: 0;
+  left: 0;
 `;
 
 const NavMenu = styled.ul`
@@ -62,7 +67,7 @@ const SideMenu = (props) => {
   };
 
   return (
-    <Nav className={'column column-25'}>
+    <Nav>
       <NavMenu>{generateMenuItems()}</NavMenu>
     </Nav>
   );

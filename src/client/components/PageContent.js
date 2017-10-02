@@ -4,11 +4,12 @@ import styled from 'styled-components';
 
 const ContentDiv = styled.div`
   padding-top: 2rem !important;
+  padding-left: 33rem !important;
   background-color: #fff;
 `;
 
 const PageContent = props => (
-  <ContentDiv className="column column-75">
+  <ContentDiv className="column">
     <div>{props.children}</div>
   </ContentDiv>
 );
