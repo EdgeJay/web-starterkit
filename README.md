@@ -6,6 +6,17 @@ I created this repository to serve as a starter kit to assist me in kickstarting
 
 Feel free to post issues or raise PRs if you found any bugs or areas that require improvement.
 
+## Pre-requisites
+
+* Node.js v8.3.0 and above must be installed.
+* Recommended to use [yarn](https://yarnpkg.com) as package manager
+
+## Getting Started
+
+1. `yarn install` or `npm install`
+2. `npm run dev:server`
+3. Open http://localhost:6150 in web browser
+
 ## Features
 
 * [x] Powered by Node.js v8 + Koa v2
