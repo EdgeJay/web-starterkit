@@ -17,7 +17,7 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * [x] Webpack hot module replacement + Koa HMR middlewares for instant review of changes without the need to constantly reload app
 * [x] Automatic Node.js app rebooting via [Nodemon](https://github.com/remy/nodemon)
 * [x] [Eslint](https://eslint.org/) for code consistency and encourage better code writing styles
-* [ ] Responsive components styled using [styled-components](https://www.styled-components.com) _\*WIP\*_
+* [x] Responsive components styled using [styled-components](https://www.styled-components.com) _\*WIP\*_
 * [ ] Progressive web app (PWA) _\*Coming soon\*_
 * [ ] Tests _\*Coming soon\*_
 
