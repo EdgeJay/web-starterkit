@@ -2,15 +2,51 @@ require('dotenv').load();
 const path = require('path');
 const webpack = require('webpack');
 
+const inDevelopmentMode = (process.env.NODE_ENV === 'development');
+const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true');
+
+const envVars = ['NODE_ENV', 'ENABLE_WEBPACK_HMR'];
+
+const hmrLibs = [
+  'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+  'react-hot-loader/patch',
+];
+
+const entry = {
+  app: [],
+};
+
+const babelPlugins = [
+  'transform-react-jsx',
+  'transform-runtime',
+  'transform-es2015-spread',
+  'transform-object-rest-spread',
+];
+
+let plugins = [
+  new webpack.EnvironmentPlugin(envVars),
+  new webpack.optimize.OccurrenceOrderPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
+];
+
+if (enableHMR) {
+  entry.app = entry.app.concat(hmrLibs);
+
+  babelPlugins.push('react-hot-loader/babel');
+
+  plugins = [
+    new webpack.EnvironmentPlugin(envVars),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+  ];
+}
+
+entry.app.push('./src/client/AppWrapper.js');
+
 const clientConfig = {
   target: 'web',
-  entry: {
-    app: [
-      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-      'react-hot-loader/patch',
-      './src/client/AppWrapper.js',
-    ],
-  },
+  entry,
   output: {
     path: path.resolve(__dirname, './dist/assets/'),
     filename: 'js/[name].js',
@@ -43,13 +79,7 @@ const clientConfig = {
             }],
             'react',
           ],
-          plugins: [
-            'transform-react-jsx',
-            'transform-runtime',
-            'transform-es2015-spread',
-            'transform-object-rest-spread',
-            'react-hot-loader/babel',
-          ],
+          plugins: babelPlugins,
         },
       }
     }, {
@@ -62,12 +92,7 @@ const clientConfig = {
       },
     }]
   },
-  plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-  ],
+  plugins,
 };
 
 module.exports = [clientConfig];
