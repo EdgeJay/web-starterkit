@@ -1,11 +1,14 @@
 require('dotenv').load();
 const path = require('path');
 const webpack = require('webpack');
+const MinifyPlugin = require('babel-minify-webpack-plugin');
 
 const inDevelopmentMode = (process.env.NODE_ENV === 'development');
 const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true');
 
 const envVars = ['NODE_ENV', 'ENABLE_WEBPACK_HMR'];
+
+let outputFilename = 'js/[name].min.js';
 
 const hmrLibs = [
   'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
@@ -27,9 +30,12 @@ let plugins = [
   new webpack.EnvironmentPlugin(envVars),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
+  new MinifyPlugin(),
 ];
 
 if (enableHMR) {
+  outputFilename = 'js/[name].js';
+
   entry.app = entry.app.concat(hmrLibs);
 
   babelPlugins.push('react-hot-loader/babel');
@@ -49,7 +55,7 @@ const clientConfig = {
   entry,
   output: {
     path: path.resolve(__dirname, './dist/assets/'),
-    filename: 'js/[name].js',
+    filename: outputFilename,
     publicPath: '/assets/',
   },
   module: {
