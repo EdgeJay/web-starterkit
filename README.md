@@ -13,9 +13,10 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 
 ## Getting Started
 
-1. `yarn install` or `npm install`
-2. `npm run dev:server`
-3. Open http://localhost:6150 in web browser
+1. Copy dotenv file from `/deploy/local` folder into project root folder and rename to `.env`
+2. `yarn install` or `npm install`
+3. `npm run dev:server`
+4. Open http://localhost:6150 in web browser
 
 ## Features
 
