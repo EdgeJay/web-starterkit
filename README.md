@@ -19,7 +19,7 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 
 ## Features
 
-* [x] Powered by Node.js v8 + Koa v2
+* [x] Powered by Node.js v8 + [Koa v2](http://koajs.com/)
 * [x] UI rendered by React v16 + react-router-redux
 * [x] Based CSS styles provided by [Milligram CSS](http://milligram.io/)
 * [x] [styled-components](https://www.styled-components.com) for styling React components
@@ -31,7 +31,11 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * [x] Responsive components styled using [styled-components](https://www.styled-components.com) _\*WIP\*_
 * [ ] Progressive web app (PWA) _\*Coming soon\*_
 * [ ] Tests _\*Coming soon\*_
-* [ ] Production ready bundles _\*WIP\*_
+* [x] Production ready bundles
+
+## Production Mode
+
+_Documentation coming soon!_
 
 ## Wishlist
 
