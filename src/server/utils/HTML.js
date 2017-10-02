@@ -4,6 +4,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 
+const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
+
 const HTML = ({ content, store }) => (
   <html lang="en">
     <head>
@@ -27,7 +29,7 @@ const HTML = ({ content, store }) => (
     <body>
       <div id="mount" dangerouslySetInnerHTML={{ __html: content }} />
       <script dangerouslySetInnerHTML={{ __html: `window.__preload__ = ${serialize(store.getState())};` }} />
-      <script src="/assets/js/app.js" />
+      <script src={useBuildBundle ? '/assets/js/app.min.js' : '/assets/js/app.js'} />
     </body>
   </html>
 );
