@@ -1,4 +1,6 @@
+import path from 'path';
 import Router from 'koa-router';
+import serve from 'koa-static';
 import LandingController from './controllers/LandingController';
 
 function initRoutes(app) {
@@ -13,4 +15,12 @@ function initRoutes(app) {
   app.use(router.routes(), router.allowedMethods());
 }
 
-module.exports = { initRoutes };
+function initStatic(app) {
+  if (process.env.ENABLE_SERVE_DIST !== 'true') {
+    return;
+  }
+
+  app.use(serve(path.resolve(__dirname, '../../dist')));
+}
+
+module.exports = { initRoutes, initStatic };
