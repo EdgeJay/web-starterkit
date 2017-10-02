@@ -10,7 +10,7 @@ const HTML = ({ content, store }) => (
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
       <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-      <title>Web Signup Boilerplate</title>
+      <title>Web Starter Kit</title>
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic" />
       <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css" />
       <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css" />
