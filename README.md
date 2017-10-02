@@ -31,6 +31,7 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * [x] Responsive components styled using [styled-components](https://www.styled-components.com) _\*WIP\*_
 * [ ] Progressive web app (PWA) _\*Coming soon\*_
 * [ ] Tests _\*Coming soon\*_
+* [ ] Production ready bundles _\*WIP\*_
 
 ## Wishlist
 
