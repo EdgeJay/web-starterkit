@@ -11,6 +11,9 @@ import PageContent from './PageContent';
 class Main extends React.PureComponent {
   render() {
     const menu = [{
+      to: { pathname: '/' },
+      label: 'Home',
+    }, {
       to: { pathname: '/about' },
       label: 'About this repo',
     }, {
