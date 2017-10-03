@@ -34,6 +34,8 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * [ ] Tests _\*Coming soon\*_
 * [x] Production ready bundles
 * [x] Gzipped bundles
+* [x] [Helmet](https://helmetjs.github.io/) via **koa-helmet**
+* [x] CSRF protection via [koa-csrf](https://github.com/koajs/csrf)
 * [ ] Better handling of custom fonts _\*Coming soon\*_
 
 ## Preparing For Production Deployment
