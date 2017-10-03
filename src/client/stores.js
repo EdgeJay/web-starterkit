@@ -2,13 +2,34 @@ import { createStore, combineReducers, compose, applyMiddleware, bindActionCreat
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import reducers from './reducers';
 
+const initial = {
+  main: {
+    title: 'Welcome to Web Starter Kit!',
+  },
+};
+
 export function configureStore(history, initialState) {
   const reducer = combineReducers({
     ...reducers,
     routing: routerReducer,
   });
 
-  const store = createStore(reducer, initialState,
+  const preloadState = Object.keys(initial).reduce((acc, val) => {
+    if (!initialState[val]) {
+      acc[val] = {
+        ...initial[val],
+      };
+    } else {
+      acc[val] = {
+        ...initial[val],
+        ...initialState[val],
+      };
+    }
+
+    return acc;
+  }, {});
+
+  const store = createStore(reducer, preloadState,
     compose(
       applyMiddleware(
         routerMiddleware(history),
