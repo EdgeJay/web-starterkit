@@ -29,14 +29,20 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * [x] Webpack hot module replacement + Koa HMR middlewares for instant review of changes without the need to constantly reload app
 * [x] Automatic Node.js app rebooting via [Nodemon](https://github.com/remy/nodemon)
 * [x] [Eslint](https://eslint.org/) for code consistency and encourage better code writing styles
-* [x] Responsive components styled using [styled-components](https://www.styled-components.com) _\*WIP\*_
+* [x] Responsive components styled using [styled-components](https://www.styled-components.com)
 * [ ] Progressive web app (PWA) _\*Coming soon\*_
 * [ ] Tests _\*Coming soon\*_
 * [x] Production ready bundles
+* [x] Gzipped bundles
+* [ ] Better handling of custom fonts _\*Coming soon\*_
 
-## Production Mode
+## Preparing For Production Deployment
 
-_Documentation coming soon!_
+1. Make sure the following set of commands are included in your deployment script
+    * `cp ./deploy/production/dotenv .env`
+    * `yarn install` or `npm install`
+    * `npm run build`
+2. `npm run build` generates production-ready versions of Javascript bundles used by front-end app, and related static assets into the `/dist/assets` folder. You should come up with your own post-deployment strategy to copy/move the files into appropriate storage locations and update your app code accordingly.
 
 ## Wishlist
 
