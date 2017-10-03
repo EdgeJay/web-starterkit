@@ -8,6 +8,7 @@ function initRoutes(app) {
 
   router.get('/', LandingController.getLanding);
   router.get('/about', LandingController.getLanding);
+  router.get('/features', LandingController.getLanding);
   router.get('/libraries', LandingController.getLanding);
   router.get('/extend', LandingController.getLanding);
   router.get('/contact', LandingController.getLanding);
