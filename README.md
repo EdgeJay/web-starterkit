@@ -48,4 +48,5 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 
 ## Wishlist
 
+* Hosted demo app
 * React UI testing with [Enzyme](https://github.com/airbnb/enzyme) ?
