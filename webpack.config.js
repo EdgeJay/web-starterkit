@@ -5,7 +5,8 @@ const MinifyPlugin = require('babel-minify-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 const inDevelopmentMode = (process.env.NODE_ENV === 'development');
-const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true');
+const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true' &&
+  process.env.NODE_ENV !== 'production');
 
 const envVars = ['NODE_ENV', 'ENABLE_WEBPACK_HMR', 'ENABLE_SERVE_DIST'];
 

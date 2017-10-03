@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { AppContainer } from 'react-hot-loader';
 
-const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true');
+const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true' &&
+  process.env.NODE_ENV !== 'production');
 
 const App = (props) => {
   if (enableHMR) {
