@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Template project to kickstart new web projects",
   "scripts": {
-    "build": "ENABLE_WEBPACK_HMR=false NODE_ENV=production webpack",
+    "build": "NODE_ENV=production webpack",
     "dev:server": "nodemon -L",
     "lint:server": "eslint -c ./.eslintrc.js ./index.js \"./src/server/**\"",
     "start": "node --harmony index.js",
