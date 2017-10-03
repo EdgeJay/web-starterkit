@@ -2,6 +2,7 @@ require('dotenv').load();
 const path = require('path');
 const webpack = require('webpack');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const inDevelopmentMode = (process.env.NODE_ENV === 'development');
 const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true');
@@ -31,6 +32,7 @@ let plugins = [
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new MinifyPlugin(),
+  new CompressionPlugin(),
 ];
 
 if (enableHMR) {
