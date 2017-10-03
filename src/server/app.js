@@ -8,6 +8,12 @@ import { initBodyParser } from './helpers';
 const port = process.env.NODE_PORT;
 const app = new Koa();
 
+app.keys = [
+  process.env.COOKIE_KEY_1,
+  process.env.COOKIE_KEY_2,
+  process.env.COOKIE_KEY_3,
+];
+
 initSecurity(app);
 initViews(app);
 initWebpack(app);
