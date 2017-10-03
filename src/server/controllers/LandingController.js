@@ -11,7 +11,7 @@ export default class LandingController {
   static async getLanding(ctx) {
     const location = ctx.path;
     const memoryHistory = createMemoryHistory(location);
-    const store = configureStore(memoryHistory);
+    const store = configureStore(memoryHistory, { main: { csrf: ctx.state.csrf } });
     const history = syncHistoryWithStore(memoryHistory, store);
     let content = '';
 
