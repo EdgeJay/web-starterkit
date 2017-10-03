@@ -1,4 +1,5 @@
 import Koa from 'koa';
+import { initSecurity } from './secure';
 import { initViews } from './views';
 import { initWebpack } from './webpack';
 import { initRoutes, initStatic } from './routes';
@@ -7,6 +8,7 @@ import { initBodyParser } from './helpers';
 const port = process.env.NODE_PORT;
 const app = new Koa();
 
+initSecurity(app);
 initViews(app);
 initWebpack(app);
 initBodyParser(app);
