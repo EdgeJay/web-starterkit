@@ -1,9 +1,9 @@
 /* eslint-disable react/no-danger */
-/* eslint-disable max-len */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Api from '../utils/Api';
 import { bindActions, mapStateToProps } from '../stores';
 import * as actions from '../actions/main';
 import PageHeader from './PageHeader';
@@ -14,15 +14,43 @@ class Features extends React.PureComponent {
 
     this.state = {
       enableCSRFTest: true,
+      csrfResponse: '',
     };
   }
 
-  onTestCSRFToken(evt) {
+  onTestCSRFToken(evt, withToken) {
     evt.preventDefault();
 
     this.setState({
       enableCSRFTest: false,
+      csrfResponse: '',
     });
+
+    this.validateCSRFToken(withToken);
+  }
+
+  validateCSRFToken(withToken) {
+    const payload = {};
+
+    if (withToken) {
+      // eslint-disable-next-line dot-notation
+      payload['_csrf'] = this.props.store.csrf;
+    }
+
+    Api.post({
+      path: '/validate-csrf',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      payload,
+    })
+      .then(response => response.json())
+      .then((response) => {
+        this.setState({
+          enableCSRFTest: true,
+          csrfResponse: JSON.stringify(response),
+        });
+      });
   }
 
   render() {
@@ -34,13 +62,16 @@ class Features extends React.PureComponent {
         <PageHeader>{'Features'}</PageHeader>
         <h2>CSRF</h2>
         <p dangerouslySetInnerHTML={{ __html: `Generated CSRF token is <code>${this.props.store.csrf}</code>. Tap on "${buttonLabel}" to test the token.` }} />
-        <form action="/validate-csrf" method="POST">
-          <input type="hidden" name="_csrf" value={this.props.store.csrf} />
-          <button
-            onClick={evt => this.onTestCSRFToken(evt)}
-            disabled={!enableCSRFTest}
-          >{buttonLabel}</button>
-        </form>
+        <button
+          onClick={evt => this.onTestCSRFToken(evt, true)}
+          disabled={!enableCSRFTest}
+        >{buttonLabel}</button>
+        {' '}
+        <button
+          onClick={evt => this.onTestCSRFToken(evt, false)}
+          disabled={!enableCSRFTest}
+        >{'Test without CSRF token'}</button>
+        <pre>{this.state.csrfResponse}</pre>
       </div>
     );
   }
