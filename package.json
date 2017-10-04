@@ -31,6 +31,7 @@
     "classnames": "^2.2.5",
     "dotenv": "^4.0.0",
     "dustjs-linkedin": "^2.7.5",
+    "fetch-ponyfill": "^4.1.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-csrf": "3.x",
