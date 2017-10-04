@@ -1,9 +1,9 @@
 import Koa from 'koa';
+import { initHelpers, initBodyParser } from './helpers';
 import { initSecurity } from './secure';
 import { initViews } from './views';
 import { initWebpack } from './webpack';
 import { initRoutes, initStatic } from './routes';
-import { initBodyParser } from './helpers';
 
 const port = process.env.NODE_PORT;
 const app = new Koa();
@@ -14,10 +14,11 @@ app.keys = [
   process.env.COOKIE_KEY_3,
 ];
 
+initHelpers(app);
+initBodyParser(app);
 initSecurity(app);
 initViews(app);
 initWebpack(app);
-initBodyParser(app);
 initRoutes(app);
 initStatic(app);
 

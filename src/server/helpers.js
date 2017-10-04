@@ -4,4 +4,16 @@ function initBodyParser(app) {
   app.use(bodyParser());
 }
 
-module.exports = { initBodyParser };
+function initHelpers(app) {
+  app.use(async (ctx, next) => {
+    ctx.json = ({ body, code = 200 }) => {
+      ctx.body = body;
+      ctx.type = 'application/json;charset=utf-8';
+      ctx.status = code;
+    };
+
+    await next();
+  });
+}
+
+module.exports = { initHelpers, initBodyParser };
