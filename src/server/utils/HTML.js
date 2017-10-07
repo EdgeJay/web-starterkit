@@ -6,7 +6,7 @@ import serialize from 'serialize-javascript';
 
 const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
 
-const HTML = ({ content, store }) => (
+const HTML = ({ content, styles, store }) => (
   <html lang="en">
     <head>
       <meta charSet="UTF-8" />
@@ -24,6 +24,7 @@ const HTML = ({ content, store }) => (
         #mount {
           height: 100%;
         }
+        ${styles}
       `}</style>
     </head>
     <body>
@@ -36,6 +37,7 @@ const HTML = ({ content, store }) => (
 
 HTML.defaultProps = {
   content: '',
+  styles: '',
 };
 
 HTML.propTypes = {
@@ -47,6 +49,7 @@ HTML.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ]).isRequired,
+  styles: PropTypes.string,
 };
 
 export default HTML;

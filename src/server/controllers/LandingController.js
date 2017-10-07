@@ -3,24 +3,29 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { ServerStyleSheet } from 'styled-components';
 import renderRoutes from '../../client/routes';
 import { configureStore } from '../../client/stores';
 import HTML from '../utils/HTML';
 
 function renderContent({ store, history, routes, location }) {
   return new Promise((resolve) => {
+    const sheet = new ServerStyleSheet();
+
     let content = '';
 
     match({ history, routes, location }, (error, redirectLocation, renderProps) => {
       if (renderProps) {
-        content = renderToString(
+        content = renderToString(sheet.collectStyles(
           <Provider store={store}>
             <RouterContext {...renderProps} />
           </Provider>,
-        );
+        ));
       }
 
-      resolve({ error, redirectLocation, content });
+      const styles = sheet.getStyleTags();
+
+      resolve({ error, redirectLocation, content, styles });
     });
   });
 }
@@ -33,7 +38,7 @@ export default class LandingController {
     const store = configureStore(memoryHistory, { main: { csrf: ctx.state.csrf } });
     const history = syncHistoryWithStore(memoryHistory, store);
 
-    const { error, redirectLocation, content } =
+    const { error, redirectLocation, content, styles } =
       await renderContent({ store, history, routes, location });
 
     if (error) {
@@ -41,7 +46,7 @@ export default class LandingController {
     } else if (redirectLocation) {
       ctx.redirect(redirectLocation.pathname + redirectLocation.search);
     } else {
-      const app = `<!DOCTYPE html>${renderToString(<HTML content={content} store={store} />)}`;
+      const app = `<!DOCTYPE html>${renderToString(<HTML content={content} styles={styles} store={store} />)}`;
       ctx.body = app;
       ctx.type = 'html';
       ctx.status = 200;
