@@ -53,4 +53,5 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * Hosted demo app
 * Stream server-side rendering
 * Cached server-side rendering
-* React UI testing with [Enzyme](https://github.com/airbnb/enzyme) ?
+* React UI testing with [Enzyme](https://github.com/airbnb/enzyme)
+* Accelerated Mobile Pages (AMP)
