@@ -23,7 +23,7 @@ function renderContent({ store, history, routes, location }) {
         ));
       }
 
-      const styles = sheet.getStyleTags();
+      const styles = sheet.getStyleElement();
 
       resolve({ error, redirectLocation, content, styles });
     });

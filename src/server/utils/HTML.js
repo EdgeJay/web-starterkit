@@ -24,8 +24,8 @@ const HTML = ({ content, styles, store }) => (
         #mount {
           height: 100%;
         }
-        ${styles}
       `}</style>
+      {styles}
     </head>
     <body>
       <div id="mount" dangerouslySetInnerHTML={{ __html: content }} />
@@ -37,7 +37,7 @@ const HTML = ({ content, styles, store }) => (
 
 HTML.defaultProps = {
   content: '',
-  styles: '',
+  styles: [],
 };
 
 HTML.propTypes = {
@@ -49,7 +49,7 @@ HTML.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ]).isRequired,
-  styles: PropTypes.string,
+  styles: PropTypes.arrayOf(PropTypes.element),
 };
 
 export default HTML;
