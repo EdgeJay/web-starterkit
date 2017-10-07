@@ -3,35 +3,48 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import routes from '../../client/routes';
+import renderRoutes from '../../client/routes';
 import { configureStore } from '../../client/stores';
 import HTML from '../utils/HTML';
 
-export default class LandingController {
-  static async getLanding(ctx) {
-    const location = ctx.path;
-    const memoryHistory = createMemoryHistory(location);
-    const store = configureStore(memoryHistory, { main: { csrf: ctx.state.csrf } });
-    const history = syncHistoryWithStore(memoryHistory, store);
+function renderContent({ store, history, routes, location }) {
+  return new Promise((resolve) => {
     let content = '';
 
     match({ history, routes, location }, (error, redirectLocation, renderProps) => {
-      if (error) {
-        ctx.status = 500;
-      } else if (redirectLocation) {
-        ctx.redirect(redirectLocation.pathname + redirectLocation.search);
-      } else if (renderProps) {
+      if (renderProps) {
         content = renderToString(
           <Provider store={store}>
             <RouterContext {...renderProps} />
           </Provider>,
         );
       }
-    });
 
-    const app = `<!DOCTYPE html>${renderToString(<HTML content={content} store={store} />)}`;
-    ctx.body = app;
-    ctx.type = 'html';
-    ctx.status = 200;
+      resolve({ error, redirectLocation, content });
+    });
+  });
+}
+
+export default class LandingController {
+  static async getLanding(ctx) {
+    const location = ctx.path;
+    const memoryHistory = createMemoryHistory(location);
+    const routes = renderRoutes();
+    const store = configureStore(memoryHistory, { main: { csrf: ctx.state.csrf } });
+    const history = syncHistoryWithStore(memoryHistory, store);
+
+    const { error, redirectLocation, content } =
+      await renderContent({ store, history, routes, location });
+
+    if (error) {
+      ctx.status = 500;
+    } else if (redirectLocation) {
+      ctx.redirect(redirectLocation.pathname + redirectLocation.search);
+    } else {
+      const app = `<!DOCTYPE html>${renderToString(<HTML content={content} store={store} />)}`;
+      ctx.body = app;
+      ctx.type = 'html';
+      ctx.status = 200;
+    }
   }
 }
