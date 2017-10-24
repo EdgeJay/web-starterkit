@@ -5,7 +5,18 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import { generateFontFace } from '../../client/utils/staticAssets';
 
-const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
+function generateJSBundle() {
+  const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
+  const disableJSBundle = (process.env.DISABLE_JS_BUNDLE === 'true');
+
+  if (!disableJSBundle) {
+    return (
+      <script src={useBuildBundle ? '/assets/js/app.min.js' : '/assets/js/app.js'} />
+    );
+  }
+
+  return null;
+}
 
 const HTML = ({ content, styles, store }) => (
   <html lang="en">
@@ -33,7 +44,7 @@ const HTML = ({ content, styles, store }) => (
     <body>
       <div id="mount" dangerouslySetInnerHTML={{ __html: content }} />
       <script dangerouslySetInnerHTML={{ __html: `window.__preload__ = ${serialize(store.getState())};` }} />
-      <script src={useBuildBundle ? '/assets/js/app.min.js' : '/assets/js/app.js'} />
+      {generateJSBundle()}
     </body>
   </html>
 );
