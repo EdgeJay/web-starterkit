@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
+import { generateFontFace } from '../../client/utils/staticAssets';
 
 const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
 
@@ -16,7 +17,8 @@ const HTML = ({ content, styles, store }) => (
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic" />
       <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css" />
       <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css" />
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: generateFontFace() }} />
+      <style dangerouslySetInnerHTML={{ __html: `
         html, body {
           height: 100%;
         }
@@ -24,7 +26,8 @@ const HTML = ({ content, styles, store }) => (
         #mount {
           height: 100%;
         }
-      `}</style>
+      ` }}
+      />
       {styles}
     </head>
     <body>

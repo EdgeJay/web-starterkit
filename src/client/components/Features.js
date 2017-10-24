@@ -2,11 +2,16 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Api from '../utils/Api';
 import { bindActions, mapStateToProps } from '../stores';
 import * as actions from '../actions/main';
 import PageHeader from './PageHeader';
+
+const CustomFontElem = styled.p`
+  font-family: 'IndieFlower', san-serif, Helvetica, Arial;
+`;
 
 class Features extends React.PureComponent {
   constructor() {
@@ -61,6 +66,11 @@ class Features extends React.PureComponent {
       <div>
         <PageHeader>{'Features'}</PageHeader>
         <h2>CSRF</h2>
+        <h2>Custom Fonts</h2>
+        <CustomFontElem>
+          {'This project supports custom fonts.'}
+          <br />{'(Using "Indie Flower" from Google Fonts)'}
+        </CustomFontElem>
         <p dangerouslySetInnerHTML={{ __html: `Generated CSRF token is <code>${this.props.store.csrf}</code>. Tap on "${buttonLabel}" to test the token.` }} />
         <button
           onClick={evt => this.onTestCSRFToken(evt, true)}
