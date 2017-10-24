@@ -99,6 +99,22 @@ const clientConfig = {
           name: 'img/[name].[ext]',
         },
       },
+    }, {
+      test: /\.(png|jpg|jpeg|svg|gif)$/,
+      use: {
+        loader: 'file-loader',
+        options: {
+          name: 'img/[name].[ext]',
+        },
+      },
+    }, {
+      test: /\.(otf|ttf)$/,
+      use: {
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]',
+        },
+      },
     }]
   },
   plugins,

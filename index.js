@@ -12,6 +12,14 @@ require('babel-register')({
     'transform-react-jsx',
     'transform-es2015-spread',
     'transform-object-rest-spread',
+    ['transform-assets', {
+      extensions: ['png', 'jpg', 'jpeg', 'svg', 'gif'],
+      name: '/assets/img/[name].[ext]',
+    }],
+    ['transform-assets', {
+      extensions: ['otf', 'ttf'],
+      name: '/assets/fonts/[name].[ext]',
+    }],
   ],
 });
 
