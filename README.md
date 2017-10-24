@@ -8,7 +8,7 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 
 ## Pre-requisites
 
-* Node.js v8.3.0 and above must be installed.
+* Node.js v8.6.0 and above must be installed.
 * Recommended to use [yarn](https://yarnpkg.com) as package manager
 
 ## Getting Started
