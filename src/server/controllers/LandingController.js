@@ -35,7 +35,16 @@ export default class LandingController {
     const location = ctx.path;
     const memoryHistory = createMemoryHistory(location);
     const routes = renderRoutes();
-    const store = configureStore(memoryHistory, { main: { csrf: ctx.state.csrf } });
+
+    const initialState = {
+      main: {
+        csrf: ctx.state.csrf,
+        enableCSRFTest: true,
+        csrfResponse: '',
+      },
+    };
+
+    const store = configureStore(memoryHistory, initialState);
     const history = syncHistoryWithStore(memoryHistory, store);
 
     const { error, redirectLocation, content, styles } =

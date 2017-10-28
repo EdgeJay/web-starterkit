@@ -1,7 +1,11 @@
 const reducers = {
-  PRELOAD_APP: ({ ...state }, { preload }) => ({
+  VALIDATING_CSRF: ({ ...state }, { now }) => ({
     ...state,
-    ...preload,
+    validateCSRFAt: now,
+  }),
+  VALIDATED_CSRF: ({ ...state }, { response }) => ({
+    ...state,
+    csrfResponse: response,
   }),
 };
 

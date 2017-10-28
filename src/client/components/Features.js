@@ -4,7 +4,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import Api from '../utils/Api';
 import { bindActions, mapStateToProps } from '../stores';
 import * as actions from '../actions/main';
 import PageHeader from './PageHeader';
@@ -14,22 +13,8 @@ const CustomFontElem = styled.p`
 `;
 
 class Features extends React.PureComponent {
-  constructor() {
-    super();
-
-    this.state = {
-      enableCSRFTest: true,
-      csrfResponse: '',
-    };
-  }
-
   onTestCSRFToken(evt, withToken) {
     evt.preventDefault();
-
-    this.setState({
-      enableCSRFTest: false,
-      csrfResponse: '',
-    });
 
     this.validateCSRFToken(withToken);
   }
@@ -42,25 +27,12 @@ class Features extends React.PureComponent {
       payload['_csrf'] = this.props.store.csrf;
     }
 
-    Api.post({
-      path: '/validate-csrf',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      payload,
-    })
-      .then(response => response.json())
-      .then((response) => {
-        this.setState({
-          enableCSRFTest: true,
-          csrfResponse: JSON.stringify(response),
-        });
-      });
+    this.props.actions.validateCSRF(payload);
   }
 
   render() {
     const buttonLabel = 'Test CSRF token validity';
-    const { enableCSRFTest } = this.state;
+    const { enableCSRFTest } = this.props.store;
 
     return (
       <div>
@@ -81,14 +53,19 @@ class Features extends React.PureComponent {
           onClick={evt => this.onTestCSRFToken(evt, false)}
           disabled={!enableCSRFTest}
         >{'Test without CSRF token'}</button>
-        <pre>{this.state.csrfResponse}</pre>
+        <pre>{JSON.stringify(this.props.store.csrfResponse)}</pre>
       </div>
     );
   }
 }
 
 Features.propTypes = {
-  store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  actions: PropTypes.oneOfType([
+    PropTypes.object,
+  ]).isRequired,
+  store: PropTypes.oneOfType([
+    PropTypes.object,
+  ]).isRequired,
 };
 
 export default connect(mapStateToProps('main'), bindActions(actions))(Features);
