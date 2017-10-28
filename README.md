@@ -39,6 +39,7 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * [x] CSRF protection via [koa-csrf](https://github.com/koajs/csrf)
 * [x] Better handling of custom fonts _\*Coming soon\*_
 * [ ] Localization _\*Coming soon\*_
+* [x] Async redux action via redux-thunk
 
 ## Preparing For Production Deployment
 

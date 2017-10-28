@@ -1,6 +1,6 @@
 {
   "name": "web-starterkit",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "description": "Template project to kickstart new web projects",
   "scripts": {
     "build": "NODE_ENV=production webpack",
