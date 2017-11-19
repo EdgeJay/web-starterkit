@@ -1,6 +1,6 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
-import asyncComponent from './asyncComponent';
+// import asyncComponent from './asyncComponent';
 import Main from '../components/Main';
 import Home from '../components/Home';
 import Libraries from '../components/Libraries';
@@ -13,15 +13,19 @@ export default function renderRoutes() {
       <IndexRoute component={Home} />
       <Route
         path="about"
-        component={asyncComponent(() => (
-          System.import('../components/About').then(module => module.default)
-        ))}
+        getComponent={(nextState, callback) => {
+          System.import(/* webpackChunkName: "about" */ '../components/About')
+            .then(module => module.default)
+            .then(Component => callback(null, Component));
+        }}
       />
       <Route
         path="features"
-        component={asyncComponent(() => (
-          System.import('../components/Features').then(module => module.default)
-        ))}
+        getComponent={(nextState, callback) => {
+          System.import(/* webpackChunkName: "features" */ '../components/Features')
+            .then(module => module.default)
+            .then(Component => callback(null, Component));
+        }}
       />
       <Route path="libraries" component={Libraries} />
       <Route path="extend" component={Extend} />

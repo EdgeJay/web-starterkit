@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { ServerStyleSheet } from 'styled-components';
-import renderRoutes from '../../client/utils/renderRoutesForServer';
+import renderRoutes from '../../client/utils/renderRoutes';
 import { configureStore } from '../../client/stores';
 import HTML from '../utils/HTML';
 
