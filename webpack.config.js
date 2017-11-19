@@ -42,9 +42,6 @@ if (enableHMR) {
   entry.app = entry.app.concat(hmrLibs);
 
   babelPlugins.push('react-hot-loader/babel');
-  babelPlugins.push(['styled-components', {
-    ssr: true,
-  }]);
 
   plugins = [
     new webpack.EnvironmentPlugin(envVars),
@@ -53,6 +50,10 @@ if (enableHMR) {
     new webpack.NoEmitOnErrorsPlugin(),
   ];
 }
+
+babelPlugins.push(['styled-components', {
+  ssr: true,
+}]);
 
 entry.app.push('./src/client/AppWrapper.js');
 
