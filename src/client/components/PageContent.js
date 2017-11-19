@@ -13,9 +13,7 @@ const ContentDiv = styled.div`
 `;
 
 const PageContent = props => (
-  <ContentDiv className="column">
-    <div>{props.children}</div>
-  </ContentDiv>
+  <ContentDiv className="column">{props.children}</ContentDiv>
 );
 
 PageContent.defaultProps = {
