@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -55,7 +55,7 @@ export default class LandingController {
     } else if (redirectLocation) {
       ctx.redirect(redirectLocation.pathname + redirectLocation.search);
     } else {
-      const app = `<!DOCTYPE html>${renderToString(<HTML content={content} styles={styles} store={store} />)}`;
+      const app = `<!DOCTYPE html>${renderToStaticMarkup(<HTML content={content} styles={styles} store={store} />)}`;
       ctx.body = app;
       ctx.type = 'html';
       ctx.status = 200;
