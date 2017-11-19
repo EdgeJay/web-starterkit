@@ -18,7 +18,7 @@ function generateJSBundle() {
   return null;
 }
 
-const HTML = ({ content, styles, store }) => (
+const HTML = ({ content, styles, store, asyncState }) => (
   <html lang="en">
     <head>
       <meta charSet="UTF-8" />
@@ -44,6 +44,7 @@ const HTML = ({ content, styles, store }) => (
     <body>
       <div id="mount" dangerouslySetInnerHTML={{ __html: content }} />
       <script dangerouslySetInnerHTML={{ __html: `window.__preload__ = ${serialize(store.getState())};` }} />
+      <script dangerouslySetInnerHTML={{ __html: `window.__asyncState__ = ${serialize(asyncState)};` }} />
       {generateJSBundle()}
     </body>
   </html>
@@ -58,12 +59,13 @@ HTML.propTypes = {
   content: PropTypes.string,
   store: PropTypes.oneOfType([
     PropTypes.array,
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.bool,
     PropTypes.object,
   ]).isRequired,
   styles: PropTypes.arrayOf(PropTypes.element),
+  asyncState: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object,
+  ]).isRequired,
 };
 
 export default HTML;
