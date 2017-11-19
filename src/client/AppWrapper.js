@@ -6,14 +6,17 @@ import { configureStore } from './stores';
 import renderRoutes from './utils/renderRoutes';
 import App from './App';
 
-// eslint-disable-next-line dot-notation
-const store = configureStore(browserHistory, window['__preload__']);
-const history = syncHistoryWithStore(browserHistory, store);
-const routes = renderRoutes();
-
 const render = () => {
+  // eslint-disable-next-line dot-notation
+  const store = configureStore(browserHistory, window['__preload__']);
+  const history = syncHistoryWithStore(browserHistory, store);
+
   ReactDOM.hydrate(
-    <App store={store} history={history} routes={routes} />,
+    <App
+      store={store}
+      history={history}
+      routes={renderRoutes()}
+    />,
     document.getElementById('mount'));
 };
 

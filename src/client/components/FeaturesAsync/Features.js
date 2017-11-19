@@ -4,9 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { bindActions, mapStateToProps } from '../stores';
-import * as actions from '../actions/main';
-import PageHeader from './PageHeader';
+import { bindActions, mapStateToProps } from '../../stores';
+import * as actions from '../../actions/main';
+import PageHeader from '../PageHeader';
 
 const CustomFontElem = styled.p`
   font-family: 'IndieFlower', san-serif, Helvetica, Arial;

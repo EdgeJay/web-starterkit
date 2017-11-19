@@ -1,5 +1,5 @@
 import React from 'react';
-import PageHeader from './PageHeader';
+import PageHeader from '../PageHeader';
 
 const About = () => (
   <div>
@@ -10,7 +10,7 @@ const About = () => (
       you found any bugs or areas that require improvement.`}</p>
     <h2>Pre-requisites</h2>
     <ul>
-      <li>Node.js v8.3.0 and above must be installed.</li>
+      <li>Node.js v8.6.0 and above must be installed.</li>
       <li>Recommended to use <a href="https://yarnpkg.com" rel="noopener noreferrer" target="_blank">yarn</a> as package manager</li>
     </ul>
     <h2>Getting Started</h2>
