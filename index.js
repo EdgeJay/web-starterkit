@@ -20,6 +20,10 @@ require('babel-register')({
       extensions: ['otf', 'ttf'],
       name: '/assets/fonts/[name].[ext]',
     }],
+    ['styled-components', {
+      ssr: true,
+    }],
+    'system-import-transformer',
   ],
 });
 
