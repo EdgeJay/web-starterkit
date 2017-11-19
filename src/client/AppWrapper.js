@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { configureStore } from './stores';
-import renderRoutes from './routes';
+import renderRoutes from './utils/renderRoutes';
 import App from './App';
 
 // eslint-disable-next-line dot-notation
@@ -20,5 +20,5 @@ const render = () => {
 render();
 
 if (module.hot) {
-  module.hot.accept('./routes', () => render());
+  module.hot.accept('./utils/renderRoutes', () => render());
 }

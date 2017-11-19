@@ -1,12 +1,12 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
-import Main from './components/Main';
-import Home from './components/Home';
-import About from './components/About';
-import Features from './components/Features';
-import Libraries from './components/Libraries';
-import Extend from './components/Extend';
-import Contact from './components/Contact';
+import About from '../components/About';
+import Main from '../components/Main';
+import Home from '../components/Home';
+import Features from '../components/Features';
+import Libraries from '../components/Libraries';
+import Extend from '../components/Extend';
+import Contact from '../components/Contact';
 
 export default function renderRoutes() {
   return (
