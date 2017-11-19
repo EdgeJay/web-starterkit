@@ -42,6 +42,9 @@ if (enableHMR) {
   entry.app = entry.app.concat(hmrLibs);
 
   babelPlugins.push('react-hot-loader/babel');
+  babelPlugins.push(['styled-components', {
+    ssr: true,
+  }]);
 
   plugins = [
     new webpack.EnvironmentPlugin(envVars),
@@ -59,6 +62,7 @@ const clientConfig = {
   output: {
     path: path.resolve(__dirname, './dist/assets/'),
     filename: outputFilename,
+    chunkFilename: outputFilename,
     publicPath: '/assets/',
   },
   module: {
@@ -111,5 +115,9 @@ const clientConfig = {
   },
   plugins,
 };
+
+if (inDevelopmentMode) {
+  clientConfig.devtool = "eval-source-map";
+}
 
 module.exports = [clientConfig];
