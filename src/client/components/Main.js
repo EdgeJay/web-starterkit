@@ -7,7 +7,6 @@ import Page from './Page';
 import SideMenu from './SideMenu';
 import PageContent from './PageContent';
 
-// eslint-disable-next-line
 class Main extends React.PureComponent {
   render() {
     const menu = [{
@@ -40,18 +39,14 @@ class Main extends React.PureComponent {
 }
 
 Main.defaultProps = {
-  children: null,
+  children: <div />,
 };
 
 Main.propTypes = {
-  // eslint-disable-next-line
-  actions: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  // eslint-disable-next-line
-  store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
-  ]), // eslint-disable-line react/forbid-prop-types
+  ]),
 };
 
 export default connect(mapStateToProps('main'), bindActions(actions))(Main);
