@@ -40,6 +40,7 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * [x] Better handling of custom fonts _\*Coming soon\*_
 * [ ] Localization _\*Coming soon\*_
 * [x] Async redux action via redux-thunk
+* [x] Asynchronous module loading via Webpack code splitting + [react-async-components](https://github.com/ctrlplusb/react-async-component)
 
 ## Preparing For Production Deployment
 

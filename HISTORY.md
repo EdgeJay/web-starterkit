@@ -1,3 +1,7 @@
+### v0.2.0 / 20 Nov 2017
+    * Bump up minor version as this version includes breaking changes that might not be compatible with v0.1.x code
+    * Broken down app into smaller components (one JS file per page) that are loaded asynchronously into app only when user navigated to page
+
 ### v0.1.6 / 28 Oct 2017
     * Add redux-thunk
     * Moved CSRF token validation logic to async redux action via redux-thunk
