@@ -8,13 +8,14 @@ import { configureStore } from './stores';
 import renderRoutes from './utils/renderRoutes';
 import App from './App';
 
-const render = () => {
-  // eslint-disable-next-line dot-notation
-  const store = configureStore(browserHistory, window['__preload__']);
-  // eslint-disable-next-line dot-notation
-  const asyncState = window['__asyncState__'];
-  const history = syncHistoryWithStore(browserHistory, store);
+// eslint-disable-next-line dot-notation
+const store = configureStore(browserHistory, window['__preload__']);
+// eslint-disable-next-line dot-notation
+const asyncState = window['__asyncState__'];
+const history = syncHistoryWithStore(browserHistory, store);
+const routes = renderRoutes();
 
+const render = () => {
   // wrap app with AsyncComponentProvider to rehydrate state
   // (refer to renderContent method in LandingController)
   const WrappedApp = (
@@ -22,7 +23,7 @@ const render = () => {
       <App
         store={store}
         history={history}
-        routes={renderRoutes()}
+        routes={routes}
       />
     </AsyncComponentProvider>
   );
@@ -38,8 +39,6 @@ const render = () => {
 
 render();
 
-/*
 if (module.hot) {
   module.hot.accept('./utils/renderRoutes', () => render());
 }
-*/
