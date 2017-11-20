@@ -117,8 +117,10 @@ const clientConfig = {
   plugins,
 };
 
+/*
 if (inDevelopmentMode) {
   clientConfig.devtool = "eval-source-map";
 }
+*/
 
 module.exports = [clientConfig];
