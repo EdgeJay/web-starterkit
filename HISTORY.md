@@ -1,3 +1,6 @@
+### v0.2.1 / 21 Nov 2017
+    * Fix order of babel plugins to avoid className mismatch issues with styled-components
+
 ### v0.2.0 / 20 Nov 2017
     * Bump up minor version as this version includes breaking changes that might not be compatible with v0.1.x code
     * Broken down app into smaller components (one JS file per page) that are loaded asynchronously into app only when user navigated to page
