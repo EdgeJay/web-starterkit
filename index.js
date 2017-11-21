@@ -9,6 +9,9 @@ require('babel-register')({
     'react',
   ],
   plugins: [
+    ['styled-components', {
+      ssr: true,
+    }],
     'transform-react-jsx',
     'transform-es2015-spread',
     'transform-object-rest-spread',
@@ -19,9 +22,6 @@ require('babel-register')({
     ['transform-assets', {
       extensions: ['otf', 'ttf'],
       name: '/assets/fonts/[name].[ext]',
-    }],
-    ['styled-components', {
-      ssr: true,
     }],
     'system-import-transformer',
   ],

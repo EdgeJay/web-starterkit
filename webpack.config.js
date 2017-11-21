@@ -22,6 +22,9 @@ const entry = {
 };
 
 const babelPlugins = [
+  ['styled-components', {
+    ssr: true,
+  }],
   'transform-react-jsx',
   'transform-runtime',
   'transform-es2015-spread',
@@ -50,10 +53,6 @@ if (enableHMR) {
     new webpack.NoEmitOnErrorsPlugin(),
   ];
 }
-
-babelPlugins.push(['styled-components', {
-  ssr: true,
-}]);
 
 entry.app.push('./src/client/AppWrapper.js');
 
