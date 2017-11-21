@@ -1,3 +1,6 @@
+### v0.2.2 / 21 Nov 2017
+    * Replaced renderToStaticMarkup with renderToStaticNodeStream to test returning content via streams
+
 ### v0.2.1 / 21 Nov 2017
     * Fix order of babel plugins to avoid className mismatch issues with styled-components
 

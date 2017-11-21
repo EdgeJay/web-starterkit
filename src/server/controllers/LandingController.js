@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderToString, renderToStaticMarkup } from 'react-dom/server';
+import { renderToString, renderToStaticNodeStream } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, match, RouterContext } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -78,8 +78,8 @@ export default class LandingController {
           asyncState={asyncState}
         />
       );
-      const app = `<!DOCTYPE html>${renderToStaticMarkup(html)}`;
-      ctx.body = app;
+
+      ctx.body = renderToStaticNodeStream(html);
       ctx.type = 'html';
       ctx.status = 200;
     }
