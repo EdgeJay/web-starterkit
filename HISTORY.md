@@ -1,3 +1,6 @@
+### v0.3.0 / 30 Nov 2017
+    * Replaced node module babel-plugin-transform-assets with babel-plugin-transform-assets-import-to-string for better static asset import path handling and support for subfolders
+
 ### v0.2.2 / 21 Nov 2017
     * Replaced renderToStaticMarkup with renderToStaticNodeStream to test returning content via streams
 
