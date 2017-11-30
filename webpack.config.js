@@ -96,19 +96,12 @@ const clientConfig = {
         },
       }
     }, {
-      test: /\.(png|jpg|jpeg|svg|gif)$/,
+      test: /\.(png|jpg|jpeg|svg|gif|otf|ttf)$/,
       use: {
         loader: 'file-loader',
         options: {
-          name: 'img/[name].[ext]',
-        },
-      },
-    }, {
-      test: /\.(otf|ttf)$/,
-      use: {
-        loader: 'file-loader',
-        options: {
-          name: 'fonts/[name].[ext]',
+          context: path.resolve(__dirname, 'src/client/assets'),
+          name: '[path][name].[ext]',
         },
       },
     }]
