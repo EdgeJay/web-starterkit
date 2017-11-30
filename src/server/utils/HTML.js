@@ -5,6 +5,33 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import { generateFontFace } from '../../client/utils/staticAssets';
 
+function generatePreloadJS() {
+  const bundles = [
+    'features',
+    'libraries',
+  ];
+  const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
+  const disableJSBundle = (process.env.DISABLE_JS_BUNDLE === 'true');
+
+  let index = 0;
+
+  if (!disableJSBundle) {
+    return bundles.map((item) => {
+      index += 1;
+      return (
+        <link
+          key={index}
+          rel="preload"
+          as="script"
+          href={useBuildBundle ? `/assets/js/${item}.min.js` : `/assets/js/${item}.js`}
+        />
+      );
+    });
+  }
+
+  return null;
+}
+
 function generateJSBundle() {
   const bundles = [
     'vendor',
@@ -40,6 +67,7 @@ const HTML = ({ content, styles, store, asyncState }) => (
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic" />
       <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css" />
       <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css" />
+      {generatePreloadJS()}
       <style dangerouslySetInnerHTML={{ __html: generateFontFace() }} />
       <style dangerouslySetInnerHTML={{ __html: `
         html, body {
