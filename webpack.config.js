@@ -18,6 +18,19 @@ const hmrLibs = [
 ];
 
 const entry = {
+  vendor: [
+    'classnames',
+    'fetch-ponyfill',
+    'react',
+    'react-dom',
+    'react-router',
+    'react-router-redux',
+    'redux-thunk',
+    'react-async-component',
+    'react-async-bootstrapper',
+    'prop-types',
+    'styled-components',
+  ],
   app: [],
 };
 
@@ -35,6 +48,9 @@ let plugins = [
   new webpack.EnvironmentPlugin(envVars),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+  }),
   new MinifyPlugin(),
   new CompressionPlugin(),
 ];
@@ -51,6 +67,9 @@ if (enableHMR) {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+    }),
   ];
 }
 

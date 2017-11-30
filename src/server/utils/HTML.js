@@ -6,13 +6,25 @@ import serialize from 'serialize-javascript';
 import { generateFontFace } from '../../client/utils/staticAssets';
 
 function generateJSBundle() {
+  const bundles = [
+    'vendor',
+    'app',
+  ];
   const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
   const disableJSBundle = (process.env.DISABLE_JS_BUNDLE === 'true');
 
+  let index = 0;
+
   if (!disableJSBundle) {
-    return (
-      <script src={useBuildBundle ? '/assets/js/app.min.js' : '/assets/js/app.js'} />
-    );
+    return bundles.map((item) => {
+      index += 1;
+      return (
+        <script
+          key={index}
+          src={useBuildBundle ? `/assets/js/${item}.min.js` : `/assets/js/${item}.js`}
+        />
+      );
+    });
   }
 
   return null;
