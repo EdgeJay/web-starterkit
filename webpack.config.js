@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const SWPrecachePlugin = require('sw-precache-webpack-plugin');
 
 const inDevelopmentMode = (process.env.NODE_ENV === 'development');
 const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true' &&
@@ -44,13 +45,15 @@ const babelPlugins = [
   'transform-object-rest-spread',
 ];
 
+const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
+  name: 'vendor',
+});
+
 let plugins = [
   new webpack.EnvironmentPlugin(envVars),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-  }),
+  commonChunkPlugin,
   new MinifyPlugin(),
   new CompressionPlugin(),
 ];
@@ -67,9 +70,7 @@ if (enableHMR) {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-    }),
+    commonChunkPlugin,
   ];
 }
 
