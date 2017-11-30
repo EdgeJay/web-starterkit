@@ -7,6 +7,7 @@ import { generateFontFace } from '../../client/utils/staticAssets';
 
 function generatePreloadJS() {
   const bundles = [
+    'about',
     'features',
     'libraries',
   ];
