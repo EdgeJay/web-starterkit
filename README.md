@@ -33,6 +33,7 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * [x] Responsive components styled using [styled-components](https://www.styled-components.com)
 * [ ] Progressive web app (PWA) _\*Coming soon\*_
 * [ ] Tests _\*Coming soon\*_
+* [x] Vendor JS bundle for all third-party JS libraries
 * [x] Production ready bundles
 * [x] Gzipped bundles
 * [x] [Helmet](https://helmetjs.github.io/) via **koa-helmet**
@@ -53,7 +54,6 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 ## Wishlist
 
 * Hosted demo app
-* Stream server-side rendering
 * Cached server-side rendering
 * React UI testing with [Enzyme](https://github.com/airbnb/enzyme)
 * Accelerated Mobile Pages (AMP)
