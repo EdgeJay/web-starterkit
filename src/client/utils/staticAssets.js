@@ -1,9 +1,11 @@
 import smiley from '../assets/img/smiling.png';
+import rocket from '../assets/img/space/rocket.jpg';
 import indieFlower from '../assets/fonts/IndieFlower/IndieFlower.ttf';
 
 const staticAssets = {
   images: {
     smiley,
+    rocket,
   },
   fonts: {
     IndieFlower: {
