@@ -4,7 +4,8 @@
   "description": "Template project to kickstart new web projects",
   "scripts": {
     "build:html": "curl localhost:6150 -o ./dist/index.html",
-    "build": "rm -rf ./dist && mkdir -p ./dist/assets && npm run build:html && NODE_ENV=production webpack",
+    "build:sw": "cp ./node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js ./dist",
+    "build": "rm -rf ./dist && mkdir -p ./dist/assets && npm run build:html && npm run build:sw && NODE_ENV=production webpack",
     "dev:server": "nodemon -L",
     "lint:server": "eslint -c ./.eslintrc.js ./index.js \"./src/server/**\"",
     "start": "node --harmony index.js",

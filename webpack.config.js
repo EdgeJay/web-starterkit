@@ -54,9 +54,8 @@ const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
 const workboxPlugin = new WorkboxPlugin({
   globDirectory: path.resolve(outputPath, '../'),
   globPatterns: ['**/*.{html,js,gif,png,jpg,jpeg,svg,otf,ttf}'],
+  swSrc: './src/client/sw.js',
   swDest: path.resolve(outputPath, '../sw.js'),
-  clientsClaim: true,
-  skipWaiting: true,
 });
 
 let plugins = [
