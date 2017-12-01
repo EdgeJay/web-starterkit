@@ -1,0 +1,29 @@
+{
+  "name": "Web Starter Kit",
+  "short_name": "Web Starter Kit",
+  "icons": [{
+    "src": "img/favicons/favicon-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }, {
+      "src": "img/favicons/apple-touch-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }, {
+      "src": "img/favicons/apple-touch-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    }, {
+      "src": "img/favicons/favicon-196x196.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }, {
+      "src": "img/favicons/mstile-310x310.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#e8eaf9",
+  "theme_color": "#4858ea"
+}

@@ -1,3 +1,4 @@
+import manifest from '../assets/manifest.json';
 import favicon from '../assets/img/favicons/favicon.ico';
 import favicon128 from '../assets/img/favicons/favicon-128.png';
 import favicon144 from '../assets/img/favicons/apple-touch-icon-144x144.png';
@@ -9,6 +10,7 @@ import rocket from '../assets/img/space/rocket.jpg';
 import indieFlower from '../assets/fonts/IndieFlower/IndieFlower.ttf';
 
 const staticAssets = {
+  manifest,
   images: {
     favicon,
     favicon128,
