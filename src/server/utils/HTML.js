@@ -5,14 +5,16 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import { generateFontFace } from '../../client/utils/staticAssets';
 
+const enablePWA = (process.env.ENABLE_PWA_MODE === 'true');
+const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
+const disableJSBundle = (process.env.DISABLE_JS_BUNDLE === 'true');
+
 function generatePreloadJS() {
   const bundles = [
     'about',
     'features',
     'libraries',
   ];
-  const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
-  const disableJSBundle = (process.env.DISABLE_JS_BUNDLE === 'true');
 
   let index = 0;
 
@@ -33,13 +35,35 @@ function generatePreloadJS() {
   return null;
 }
 
+function generateRegisterSWJS() {
+  if (enablePWA) {
+    return (
+      <script
+        dangerouslySetInnerHTML={{ __html: `
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function () {
+            navigator.serviceWorker.register('/assets/sw.js')
+              .then(function (registration) {
+                console.log('SW registered: ' + registration);
+              })
+              .catch(function (err) {
+                console.log('SW registration failed: ' + err);
+              });
+          });
+        }
+        ` }}
+      />
+    );
+  }
+
+  return null;
+}
+
 function generateJSBundle() {
   const bundles = [
     'vendor',
     'app',
   ];
-  const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
-  const disableJSBundle = (process.env.DISABLE_JS_BUNDLE === 'true');
 
   let index = 0;
 
@@ -86,6 +110,7 @@ const HTML = ({ content, styles, store, asyncState }) => (
       <div id="mount" dangerouslySetInnerHTML={{ __html: content }} />
       <script dangerouslySetInnerHTML={{ __html: `window.__preload__ = ${serialize(store.getState())};` }} />
       <script dangerouslySetInnerHTML={{ __html: `window.__asyncState__ = ${serialize(asyncState)};` }} />
+      {generateRegisterSWJS()}
       {generateJSBundle()}
     </body>
   </html>
