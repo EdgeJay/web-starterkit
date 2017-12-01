@@ -1,3 +1,4 @@
+import index from '../assets/index.html';
 import manifest from '../assets/manifest.json';
 import favicon from '../assets/img/favicons/favicon.ico';
 import favicon128 from '../assets/img/favicons/favicon-128.png';
@@ -10,6 +11,7 @@ import rocket from '../assets/img/space/rocket.jpg';
 import indieFlower from '../assets/fonts/IndieFlower/IndieFlower.ttf';
 
 const staticAssets = {
+  index,
   manifest,
   images: {
     favicon,
