@@ -45,7 +45,7 @@ function generateRegisterSWJS() {
                 console.log('SW installing: ' + registration.installing);
                 console.log('SW waiting: ' + registration.waiting);
                 console.log('SW active: ' + registration.active);
-                registration.pushManager.subscribe({ userVisibleOnly: true });
+                // registration.pushManager.subscribe({ userVisibleOnly: true });
               })
               .catch(function (err) {
                 console.log('SW registration failed: ' + err);
