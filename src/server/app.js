@@ -5,7 +5,7 @@ import { initViews } from './views';
 import { initWebpack } from './webpack';
 import { initRoutes, initStatic } from './routes';
 
-const port = process.env.NODE_PORT;
+const port = process.env.PORT || process.env.NODE_PORT;
 const app = new Koa();
 
 app.keys = [
