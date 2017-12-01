@@ -45,6 +45,7 @@ function generateRegisterSWJS() {
             navigator.serviceWorker.register('sw.js')
               .then(function (registration) {
                 console.log('SW registered: ' + registration);
+                registration.pushManager.subscribe({ userVisibleOnly: true });
               })
               .catch(function (err) {
                 console.log('SW registration failed: ' + err);
