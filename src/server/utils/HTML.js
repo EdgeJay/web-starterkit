@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
-import { generateFontFace } from '../../client/utils/staticAssets';
+import staticAssets, { generateFontFace } from '../../client/utils/staticAssets';
 
 const enablePWA = (process.env.ENABLE_PWA_MODE === 'true');
 const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
@@ -88,7 +88,7 @@ const HTML = ({ content, styles, store, asyncState }) => (
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
       <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
       <title>Web Starter Kit</title>
-      <link rel="icon" href="/assets/img/favicons/favicon.ico" />
+      <link rel="icon" href={staticAssets.images.favicon} />
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic" />
       <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css" />
       <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css" />
