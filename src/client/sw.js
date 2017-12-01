@@ -13,6 +13,10 @@ self.addEventListener('push', function (evt) {
   evt.waitUntil(self.registration.showNotification(title, options));
 });
 
+self.addEventListener('fetch', function (evt) {
+  console.log('Fetching: ' + evt.request.url);
+});
+
 // Do not remove! This is a placeholder keyword which Workbox injects
 // list of files to cache into the array.
 workbox.precache([]);
