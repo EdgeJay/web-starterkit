@@ -87,8 +87,14 @@ const HTML = ({ content, styles, store, asyncState }) => (
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
       <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+      <meta name="apple-mobile-web-app-title" content="Web Starter Kit" />
+      <meta name="msapplication-TileImage" content={staticAssets.images.favicon144} />
+      <meta name="msapplication-TileColor" content="#4858ea" />
       <title>Web Starter Kit</title>
       <link rel="icon" href={staticAssets.images.favicon} />
+      <link rel="apple-touch-icon" href={staticAssets.images.favicon152} />
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic" />
       <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css" />
       <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css" />
@@ -105,6 +111,7 @@ const HTML = ({ content, styles, store, asyncState }) => (
       ` }}
       />
       {styles}
+      <link rel="manifest" href={staticAssets.manifest} />
     </head>
     <body>
       <div id="mount" dangerouslySetInnerHTML={{ __html: content }} />
