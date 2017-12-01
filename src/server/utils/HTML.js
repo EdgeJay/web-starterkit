@@ -94,6 +94,7 @@ const HTML = ({ content, styles, store, asyncState }) => (
       <meta name="apple-mobile-web-app-title" content="Web Starter Kit" />
       <meta name="msapplication-TileImage" content={staticAssets.images.favicon144} />
       <meta name="msapplication-TileColor" content="#4858ea" />
+      <meta name="theme-color" content="#4858ea" />
       <title>Web Starter Kit</title>
       <link rel="icon" href={staticAssets.images.favicon} />
       <link rel="apple-touch-icon" href={staticAssets.images.favicon152} />
