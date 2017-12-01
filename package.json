@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "Template project to kickstart new web projects",
   "scripts": {
-    "build:html": "curl localhost:6150 -o ./dist/assets/index.html",
+    "build:html": "curl localhost:6150 -o ./dist/index.html",
     "build": "rm -rf ./dist && mkdir -p ./dist/assets && npm run build:html && NODE_ENV=production webpack",
     "dev:server": "nodemon -L",
     "lint:server": "eslint -c ./.eslintrc.js ./index.js \"./src/server/**\"",

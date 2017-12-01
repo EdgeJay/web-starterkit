@@ -42,7 +42,7 @@ function generateRegisterSWJS() {
         dangerouslySetInnerHTML={{ __html: `
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', function () {
-            navigator.serviceWorker.register('/assets/sw.js')
+            navigator.serviceWorker.register('sw.js')
               .then(function (registration) {
                 console.log('SW registered: ' + registration);
               })
