@@ -9,6 +9,8 @@
     "dev:server": "nodemon -L",
     "lint:server": "eslint -c ./.eslintrc.js ./index.js \"./src/server/**\"",
     "start": "node --harmony index.js",
+    "preinstall": "chmod +x ./scripts/preinstall.sh && ./scripts/preinstall.sh",
+    "postinstall": "chmod +x ./scripts/postinstall.sh && ./scripts/postinstall.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
