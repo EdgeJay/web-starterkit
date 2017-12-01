@@ -126,7 +126,7 @@ const clientConfig = {
         },
       }
     }, {
-      test: /\.(ico|png|jpg|jpeg|svg|gif|otf|ttf|json)$/,
+      test: /\.(html|ico|png|jpg|jpeg|svg|gif|otf|ttf|json)$/,
       use: {
         loader: 'file-loader',
         options: {

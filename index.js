@@ -16,7 +16,7 @@ require('babel-register')({
     'transform-es2015-spread',
     'transform-object-rest-spread',
     ['transform-assets-import-to-string', {
-      extensions: ['.ico', '.png', '.jpg', '.jpeg', '.svg', '.gif', '.otf', '.ttf', '.json'],
+      extensions: ['.html', '.ico', '.png', '.jpg', '.jpeg', '.svg', '.gif', '.otf', '.ttf', '.json'],
       baseDir: '/assets',
       baseUri: '',
     }],
