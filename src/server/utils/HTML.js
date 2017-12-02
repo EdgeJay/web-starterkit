@@ -10,13 +10,11 @@ const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
 const disableJSBundle = (process.env.DISABLE_JS_BUNDLE === 'true');
 
 function generatePreloadJS() {
-  const bundles = [
-    'features',
-  ];
+  const bundles = [];
 
   let index = 0;
 
-  if (!disableJSBundle) {
+  if (!disableJSBundle && bundles.length > 0) {
     return bundles.map((item) => {
       index += 1;
       return (
