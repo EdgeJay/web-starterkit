@@ -21,6 +21,10 @@
       "src": "img/favicons/mstile-310x310.png",
       "sizes": "256x256",
       "type": "image/png"
+    }, {
+      "src": "img/favicons/mstile-310x310.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }],
   "start_url": "/index.html",
   "display": "standalone",
