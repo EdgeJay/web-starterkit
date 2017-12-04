@@ -7,6 +7,7 @@ import favicon192 from '../assets/img/favicons/favicon-196x196.png';
 import favicon256 from '../assets/img/favicons/mstile-310x310.png';
 import smiley from '../assets/img/smiling.png';
 import rocket from '../assets/img/space/rocket.jpg';
+import rocketSmall from '../assets/img/space/rocket_h200.jpg';
 import indieFlower from '../assets/fonts/IndieFlower/IndieFlower.ttf';
 
 const staticAssets = {
@@ -20,6 +21,7 @@ const staticAssets = {
     favicon256,
     smiley,
     rocket,
+    rocketSmall,
   },
   fonts: {
     IndieFlower: {

@@ -1,6 +1,6 @@
 {
   "name": "web-starterkit",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Template project to kickstart new web projects",
   "scripts": {
     "build:html": "curl localhost:6150 -o ./src/client/assets/index.html",
