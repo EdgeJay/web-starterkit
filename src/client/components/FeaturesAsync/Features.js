@@ -37,12 +37,12 @@ class Features extends React.PureComponent {
     return (
       <div>
         <PageHeader>{'Features'}</PageHeader>
-        <h2>CSRF</h2>
         <h2>Custom Fonts</h2>
         <CustomFontElem>
           {'This project supports custom fonts.'}
           <br />{'(Using "Indie Flower" from Google Fonts)'}
         </CustomFontElem>
+        <h2>CSRF</h2>
         <p dangerouslySetInnerHTML={{ __html: `Generated CSRF token is <code>${this.props.store.csrf}</code>. Tap on "${buttonLabel}" to test the token.` }} />
         <button
           onClick={evt => this.onTestCSRFToken(evt, true)}
