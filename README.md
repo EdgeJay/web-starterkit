@@ -31,7 +31,7 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * [x] Automatic Node.js app rebooting via [Nodemon](https://github.com/remy/nodemon)
 * [x] [Eslint](https://eslint.org/) for code consistency and encourage better code writing styles
 * [x] Responsive components styled using [styled-components](https://www.styled-components.com)
-* [ ] Progressive web app (PWA) _\*Coming soon\*_
+* [x] Progressive web app (PWA)
 * [ ] Tests _\*Coming soon\*_
 * [x] Vendor JS bundle for all third-party JS libraries
 * [x] Production ready bundles
