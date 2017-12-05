@@ -1,4 +1,4 @@
-### v0.3.7 / 5 Dec 2017
+### v0.4.0 / 5 Dec 2017
     * Rollout Progressive Web App (PWA) features!
     * Add webpack-bundle-analyzer to analyze and provide visual report on bundle sizes
 
