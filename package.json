@@ -5,6 +5,7 @@
   "scripts": {
     "build:html": "curl localhost:6150 -o ./src/client/assets/index.html",
     "build:sw": "cp ./node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js ./dist",
+    "build:analyse": "ANALYSE_BUILD_MODE=true NODE_ENV=production ./node_modules/.bin/webpack",
     "build": "chmod +x ./scripts/build.sh && ./scripts/build.sh",
     "dev:server": "nodemon -L",
     "lint:server": "eslint -c ./.eslintrc.js ./index.js \"./src/server/**\"",
@@ -86,6 +87,7 @@
     "nodemon": "^1.12.1",
     "react-hot-loader": "^3.0.0-beta.7",
     "webpack": "^3.6.0",
+    "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.8.2",
     "webpack-hot-middleware": "^2.19.1",

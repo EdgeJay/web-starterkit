@@ -4,7 +4,9 @@ const webpack = require('webpack');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const analyseBuildMode = (process.env.ANALYSE_BUILD_MODE === 'true');
 const inDevelopmentMode = (process.env.NODE_ENV === 'development');
 const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true' &&
   process.env.NODE_ENV !== 'production');
@@ -82,6 +84,13 @@ if (enableHMR) {
     new webpack.NoEmitOnErrorsPlugin(),
     commonChunkPlugin,
   ];
+}
+
+if (analyseBuildMode) {
+  plugins.push(new BundleAnalyzerPlugin({
+    analyzerMode: 'static',
+    reportFilename: '../../reports/webpack/report.html',
+  }));
 }
 
 entry.app.push('./src/client/AppWrapper.js');
