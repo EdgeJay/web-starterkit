@@ -1,3 +1,7 @@
+### v0.3.7 / 5 Dec 2017
+    * Rollout Progressive Web App (PWA) features!
+    * Add webpack-bundle-analyzer to analyze and provide visual report on bundle sizes
+
 ### v0.3.0 / 30 Nov 2017
     * Replaced node module babel-plugin-transform-assets with babel-plugin-transform-assets-import-to-string for better static asset import path handling and support for subfolders
 
