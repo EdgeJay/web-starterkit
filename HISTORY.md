@@ -1,3 +1,6 @@
+### v0.5.0 / 6 Dec 2017
+    * Disable loading React components asynchronously if hot module reloading is enabled
+
 ### v0.4.0 / 5 Dec 2017
     * Rollout Progressive Web App (PWA) features!
     * Add webpack-bundle-analyzer to analyze and provide visual report on bundle sizes
