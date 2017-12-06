@@ -19,6 +19,9 @@ class Main extends React.PureComponent {
       to: { pathname: '/features' },
       label: 'Features',
     }, {
+      to: { pathname: '/flickr' },
+      label: 'Flickr',
+    }, {
       to: '/libraries',
       label: 'Libraries',
     }, {
