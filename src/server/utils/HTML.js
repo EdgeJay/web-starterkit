@@ -5,8 +5,11 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import staticAssets, { generateFontFace } from '../../client/utils/staticAssets';
 
+const inProductionMode = (process.env.NODE_ENV === 'production');
+const inDevelopmentMode = (process.env.NODE_ENV === 'development');
+const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true' && !inProductionMode);
 const enablePWA = (process.env.ENABLE_PWA_MODE === 'true');
-const useBuildBundle = (process.env.ENABLE_SERVE_DIST === 'true');
+const useBuildBundle = !(enableHMR || inDevelopmentMode);
 const disableJSBundle = (process.env.DISABLE_JS_BUNDLE === 'true');
 
 function generatePreloadJS() {

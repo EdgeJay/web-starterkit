@@ -5,6 +5,10 @@ import { bindActions, mapStateToProps } from '../../stores';
 import * as actions from '../../actions/main';
 import PageHeader from '../PageHeader';
 
+function generateImageUrl({ id, farm, secret, server }) {
+  return `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_m.jpg`;
+}
+
 class Flickr extends React.Component {
   componentDidMount() {
     if (typeof window === 'object') {
@@ -13,10 +17,27 @@ class Flickr extends React.Component {
   }
 
   render() {
+    const { photos } = this.props.store.xhr.flickrRecents || {};
+    const results = (photos && photos.photo) || [];
+    let key = 0;
+
     return (
       <div>
         <PageHeader>Flickr</PageHeader>
         <p>This page demonstrates how caching of Flickr data and images work in PWA.</p>
+        <div className="container">
+          <div className="row">{
+            results.map((item) => {
+              key += 1;
+
+              return (
+                <div key={key} className="column column-33">
+                  <img src={generateImageUrl(item)} alt={item.title} title={item.title} />
+                </div>
+              );
+            })
+          }</div>
+        </div>
       </div>
     );
   }
@@ -26,7 +47,6 @@ Flickr.propTypes = {
   actions: PropTypes.oneOfType([
     PropTypes.object,
   ]).isRequired,
-  // eslint-disable-next-line
   store: PropTypes.oneOfType([
     PropTypes.object,
   ]).isRequired,
