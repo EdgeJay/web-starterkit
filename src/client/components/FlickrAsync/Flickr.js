@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { bindActions, mapStateToProps } from '../../stores';
 import * as actions from '../../actions/main';
 import PageHeader from '../PageHeader';
+
+const Row = styled.div`
+flex-wrap: wrap;
+`;
 
 function generateImageUrl({ id, farm, secret, server }) {
   return `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_m.jpg`;
@@ -26,7 +31,7 @@ class Flickr extends React.Component {
         <PageHeader>Flickr</PageHeader>
         <p>This page demonstrates how caching of Flickr data and images work in PWA.</p>
         <div className="container">
-          <div className="row">{
+          <Row className="row">{
             results.map((item) => {
               key += 1;
 
@@ -36,7 +41,7 @@ class Flickr extends React.Component {
                 </div>
               );
             })
-          }</div>
+          }</Row>
         </div>
       </div>
     );
