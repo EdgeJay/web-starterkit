@@ -40,3 +40,31 @@ export function validateCSRF(payload) {
       });
   };
 }
+
+function fetchingFlickrRecents() {
+  return {
+    type: 'FETCHING_FLICKR_RECENTS',
+  };
+}
+
+function fetchedFlickrRecents(response) {
+  return {
+    type: 'FETCHED_FLICKR_RECENTS',
+    response,
+  };
+}
+
+export function fetchFlickrRecents() {
+  return (dispatch) => {
+    dispatch(fetchingFlickrRecents());
+
+    const url = '/flickr-recents?per_page=12&page=1';
+    const opts = {
+      method: 'GET',
+    };
+
+    fetch(url, opts)
+      .then(response => response.json())
+      .then(response => dispatch(fetchedFlickrRecents(response)));
+  };
+}
