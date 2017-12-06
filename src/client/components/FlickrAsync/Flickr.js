@@ -8,6 +8,11 @@ import PageHeader from '../PageHeader';
 
 const Row = styled.div`
 flex-wrap: wrap;
+
+.column {
+  margin-top: 0.625rem;
+  text-align: center;
+}
 `;
 
 function generateImageUrl({ id, farm, secret, server }) {
