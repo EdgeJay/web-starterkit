@@ -10,6 +10,8 @@ function initRoutes(app) {
   router.get('/', LandingController.getLanding);
   router.get('/about', LandingController.getLanding);
   router.get('/features', LandingController.getLanding);
+  router.get('/flickr', LandingController.getLanding);
+  router.get('/flickr-recents', ApiController.getFlickrRecents);
   router.get('/libraries', LandingController.getLanding);
   router.get('/extend', LandingController.getLanding);
   router.get('/contact', LandingController.getLanding);
