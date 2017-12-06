@@ -56,6 +56,12 @@ export default class LandingController {
         csrf: ctx.state.csrf,
         enableCSRFTest: true,
         csrfResponse: '',
+        busy: {
+          flickrRecents: false,
+        },
+        xhr: {
+          flickrRecents: null,
+        },
       },
     };
 
