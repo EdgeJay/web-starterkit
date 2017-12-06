@@ -7,101 +7,138 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const analyseBuildMode = (process.env.ANALYSE_BUILD_MODE === 'true');
+const inProductionMode = (process.env.NODE_ENV === 'production');
 const inDevelopmentMode = (process.env.NODE_ENV === 'development');
-const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true' &&
-  process.env.NODE_ENV !== 'production');
+const enablePWA = (process.env.ENABLE_PWA_MODE === 'true');
+const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true' && !inProductionMode);
 
 const envVars = ['NODE_ENV', 'ENABLE_PWA_MODE', 'ENABLE_WEBPACK_HMR', 'ENABLE_SERVE_DIST'];
 
 const outputPath = path.resolve(__dirname, './dist/assets/');
 
-let outputFilename = 'js/[name].min.js';
+function generateOutputFilename() {
+  let fn = 'js/[name].min.js';
 
-const hmrLibs = [
-  'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-  'react-hot-loader/patch',
-];
+  if (enableHMR || inDevelopmentMode) {
+    fn = 'js/[name].js';
+  }
 
-const entry = {
-  vendor: [
-    'classnames',
-    'fetch-ponyfill',
-    'react',
-    'react-dom',
-    'react-router',
-    'react-router-redux',
-    'redux-thunk',
-    'react-async-component',
-    'react-async-bootstrapper',
-    'prop-types',
-    'styled-components',
-  ],
-  app: [],
-};
+  return fn;
+}
 
-const babelPlugins = [
-  ['styled-components', {
-    ssr: true,
-  }],
-  'transform-react-jsx',
-  'transform-runtime',
-  'transform-es2015-spread',
-  'transform-object-rest-spread',
-];
-
-const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
-  name: 'vendor',
-});
-
-const workboxPlugin = new WorkboxPlugin({
-  globDirectory: path.resolve(outputPath, '../'),
-  globPatterns: ['**/*.{html,js,gif,png,jpg,jpeg,svg,otf,ttf,json,ico}'],
-  swSrc: './src/client/sw.js',
-  swDest: path.resolve(outputPath, '../sw.js'),
-});
-
-let plugins = [
-  new webpack.EnvironmentPlugin(envVars),
-  new webpack.optimize.OccurrenceOrderPlugin(),
-  new webpack.NoEmitOnErrorsPlugin(),
-  commonChunkPlugin,
-  new MinifyPlugin(),
-  new CompressionPlugin(),
-  workboxPlugin,
-];
-
-if (enableHMR) {
-  outputFilename = 'js/[name].js';
-
-  entry.app = entry.app.concat(hmrLibs);
-
-  babelPlugins.push('react-hot-loader/babel');
-
-  plugins = [
-    new webpack.EnvironmentPlugin(envVars),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    commonChunkPlugin,
+function generateEntry() {
+  const hmrLibs = [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+    'react-hot-loader/patch',
   ];
+
+  const entry = {
+    vendor: [
+      'classnames',
+      'fetch-ponyfill',
+      'react',
+      'react-dom',
+      'react-router',
+      'react-router-redux',
+      'redux-thunk',
+      'react-async-component',
+      'react-async-bootstrapper',
+      'prop-types',
+      'styled-components',
+    ],
+    app: [],
+  };
+
+  if (enableHMR) {
+    entry.app = entry.app.concat(hmrLibs);
+  }
+
+  entry.app.push('./src/client/AppWrapper.js');
+
+  return entry;
 }
 
-if (analyseBuildMode) {
-  plugins.push(new BundleAnalyzerPlugin({
-    analyzerMode: 'static',
-    reportFilename: '../../reports/webpack/report.html',
-  }));
+function generateBabelPlugins() {
+  const babelPlugins = [
+    ['styled-components', {
+      ssr: true,
+    }],
+    'transform-react-jsx',
+    'transform-runtime',
+    'transform-es2015-spread',
+    'transform-object-rest-spread',
+  ];
+
+  if (enableHMR) {
+    babelPlugins.push('react-hot-loader/babel');
+  }
+
+  return babelPlugins;
 }
 
-entry.app.push('./src/client/AppWrapper.js');
+function generateWebpackPlugins() {
+  const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+  });
+  
+  const workboxPlugin = new WorkboxPlugin({
+    globDirectory: path.resolve(outputPath, '../'),
+    globPatterns: ['**/*.{html,js,gif,png,jpg,jpeg,svg,otf,ttf,json,ico}'],
+    swSrc: './src/client/sw.js',
+    swDest: path.resolve(outputPath, '../sw.js'),
+  });
+
+  let plugins = [];
+
+  if (inProductionMode) {
+    plugins = [
+      new webpack.EnvironmentPlugin(envVars),
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
+      commonChunkPlugin,
+      new MinifyPlugin(),
+      new CompressionPlugin(),
+    ];
+  } else {
+    if (enableHMR) {
+      plugins = [
+        new webpack.EnvironmentPlugin(envVars),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+        commonChunkPlugin,
+      ];
+    } else {
+      plugins = [
+        new webpack.EnvironmentPlugin(envVars),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+        commonChunkPlugin,
+      ];
+    }
+  }
+
+  if (enablePWA) {
+    plugins.push(workboxPlugin);
+  }
+
+  if (analyseBuildMode) {
+    plugins.push(new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: '../../reports/webpack/report.html',
+    }));
+  }
+
+  return plugins;
+}
 
 const clientConfig = {
   target: 'web',
-  entry,
+  entry: generateEntry(),
   output: {
     path: outputPath,
-    filename: outputFilename,
-    chunkFilename: outputFilename,
+    filename: generateOutputFilename(),
+    chunkFilename: generateOutputFilename(),
     publicPath: '/assets/',
   },
   module: {
@@ -131,7 +168,7 @@ const clientConfig = {
             }],
             'react',
           ],
-          plugins: babelPlugins,
+          plugins: generateBabelPlugins(),
         },
       }
     }, {
@@ -145,7 +182,7 @@ const clientConfig = {
       },
     }]
   },
-  plugins,
+  plugins: generateWebpackPlugins(),
 };
 
 /*
