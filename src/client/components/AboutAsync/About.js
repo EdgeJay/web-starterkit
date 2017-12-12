@@ -10,7 +10,7 @@ const About = () => (
       you found any bugs or areas that require improvement.`}</p>
     <h2>Pre-requisites</h2>
     <ul>
-      <li>Node.js v8.6.0 and above must be installed.</li>
+      <li>Node.js v8.9.3 and above must be installed.</li>
       <li>
         Recommended to use{' '}
         <a href="https://yarnpkg.com" rel="noopener noreferrer" target="_blank">
