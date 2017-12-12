@@ -5,10 +5,14 @@ import { initViews } from './views';
 import { initWebpack } from './webpack';
 import { initRoutes, initStatic } from './routes';
 
+const debug = require('debug')('server');
+
 const port = process.env.PORT || process.env.NODE_PORT;
 const app = new Koa();
 
 app.keys = [process.env.COOKIE_KEY_1, process.env.COOKIE_KEY_2, process.env.COOKIE_KEY_3];
+
+debug('Initializing server...');
 
 initHelpers(app);
 initBodyParser(app);
@@ -19,6 +23,5 @@ initRoutes(app);
 initStatic(app);
 
 app.listen(port, () => {
-  // eslint-disable-next-line
-  console.log(`Server running at port ${port}`);
+  debug('Server running at port %s', port);
 });
