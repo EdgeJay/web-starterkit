@@ -128,10 +128,14 @@ const HTML = ({ content, styles, store, asyncState }) => (
     <body>
       <div id="mount" dangerouslySetInnerHTML={{ __html: content }} />
       <script
-        dangerouslySetInnerHTML={{ __html: `window.__preload__ = ${serialize(store.getState())};` }}
+        dangerouslySetInnerHTML={{
+          __html: `window.__preload__ = ${serialize(store.getState())};`,
+        }}
       />
       <script
-        dangerouslySetInnerHTML={{ __html: `window.__asyncState__ = ${serialize(asyncState)};` }}
+        dangerouslySetInnerHTML={{
+          __html: `window.__asyncState__ = ${serialize(asyncState)};`,
+        }}
       />
       {generateRegisterSWJS()}
       {generateJSBundle()}

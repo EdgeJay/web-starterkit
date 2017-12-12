@@ -9,61 +9,73 @@ import asyncBootstrapper from 'react-async-bootstrapper';
 import renderRoutes from '../../client/utils/renderRoutes';
 import { configureStore } from '../../client/stores';
 import HTML from '../utils/HTML';
+import { getInitialState } from '../utils/redux';
 
-function renderContent({ store, history, routes, location }) {
+const debug = require('debug')('landing');
+
+function renderContent({ store, history, routes, location, isAppShell = false }) {
   return new Promise(resolve => {
     const sheet = new ServerStyleSheet();
 
     let content = '';
-    let styles = '';
-    let asyncState = null;
+    let styles = null;
+    let asyncState = {};
 
-    match({ history, routes, location }, (error, redirectLocation, renderProps) => {
-      // create asyncContext to tap into state and send back to client
-      const asyncContext = createAsyncContext();
+    if (!isAppShell) {
+      match({ history, routes, location }, (error, redirectLocation, renderProps) => {
+        // create asyncContext to tap into state and send back to client
+        const asyncContext = createAsyncContext();
 
-      if (renderProps) {
-        const app = (
-          <AsyncComponentProvider asyncContext={asyncContext}>
-            <Provider store={store}>
-              <RouterContext {...renderProps} />
-            </Provider>
-          </AsyncComponentProvider>
-        );
+        if (renderProps) {
+          const app = (
+            <AsyncComponentProvider asyncContext={asyncContext}>
+              <Provider store={store}>
+                <RouterContext {...renderProps} />
+              </Provider>
+            </AsyncComponentProvider>
+          );
 
-        asyncBootstrapper(app).then(() => {
-          content = renderToString(sheet.collectStyles(app));
-          styles = sheet.getStyleElement();
-          asyncState = asyncContext.getState();
+          asyncBootstrapper(app).then(() => {
+            content = renderToString(sheet.collectStyles(app));
+            styles = sheet.getStyleElement();
+            asyncState = asyncContext.getState();
 
+            resolve({ error, redirectLocation, content, styles, asyncState });
+          });
+        } else {
           resolve({ error, redirectLocation, content, styles, asyncState });
-        });
-      } else {
-        resolve({ error, redirectLocation, content, styles, asyncState });
-      }
-    });
+        }
+      });
+    } else {
+      resolve({
+        error: null,
+        redirectLocation: null,
+        content,
+        styles,
+        asyncState,
+      });
+    }
   });
 }
 
 export default class LandingController {
   static async getLanding(ctx) {
-    const location = ctx.path;
+    const location = ctx.request.originalUrl;
+    const appShellRequested = ctx.path === '/app-shell.html';
     const memoryHistory = createMemoryHistory(location);
     const routes = renderRoutes();
 
-    const initialState = {
-      main: {
-        csrf: ctx.state.csrf,
-        enableCSRFTest: true,
-        csrfResponse: '',
-        busy: {
-          flickrRecents: false,
-        },
-        xhr: {
-          flickrRecents: null,
-        },
-      },
-    };
+    debug(
+      'method: %s, path: %s, app shell requested: %o',
+      ctx.request.method,
+      location,
+      appShellRequested
+    );
+
+    const initialState = getInitialState({
+      csrf: ctx.state.csrf,
+      isAppShell: appShellRequested,
+    });
 
     const store = configureStore(memoryHistory, initialState);
     const history = syncHistoryWithStore(memoryHistory, store);
@@ -73,6 +85,7 @@ export default class LandingController {
       history,
       routes,
       location,
+      isAppShell: appShellRequested,
     });
 
     if (error) {

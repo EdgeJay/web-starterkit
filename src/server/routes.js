@@ -8,6 +8,7 @@ function initRoutes(app) {
   const router = new Router();
 
   router.get('/', LandingController.getLanding);
+  router.get('/app-shell.html', LandingController.getLanding);
   router.get('/about', LandingController.getLanding);
   router.get('/features', LandingController.getLanding);
   router.get('/flickr', LandingController.getLanding);
