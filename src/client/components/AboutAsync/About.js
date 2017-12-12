@@ -11,15 +11,33 @@ const About = () => (
     <h2>Pre-requisites</h2>
     <ul>
       <li>Node.js v8.6.0 and above must be installed.</li>
-      <li>Recommended to use <a href="https://yarnpkg.com" rel="noopener noreferrer" target="_blank">yarn</a> as package manager</li>
+      <li>
+        Recommended to use{' '}
+        <a href="https://yarnpkg.com" rel="noopener noreferrer" target="_blank">
+          yarn
+        </a>{' '}
+        as package manager
+      </li>
     </ul>
     <h2>Getting Started</h2>
     <ol>
-      <li>Copy dotenv file from <code>/deploy/local</code> folder into project root folder
-        and rename to <code>.env</code></li>
-      <li><code>yarn install</code> or <code>npm install</code></li>
-      <li><code>npm run dev:server</code></li>
-      <li>Open <a href="http://localhost:6150" rel="noopener noreferrer" target="_blank">http://localhost:6150</a> in web browser</li>
+      <li>
+        Copy dotenv file from <code>/deploy/local</code> folder into project root folder and rename
+        to <code>.env</code>
+      </li>
+      <li>
+        <code>yarn install</code> or <code>npm install</code>
+      </li>
+      <li>
+        <code>npm run dev:server</code>
+      </li>
+      <li>
+        Open{' '}
+        <a href="http://localhost:6150" rel="noopener noreferrer" target="_blank">
+          http://localhost:6150
+        </a>{' '}
+        in web browser
+      </li>
     </ol>
   </div>
 );

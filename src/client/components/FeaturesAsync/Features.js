@@ -40,19 +40,23 @@ class Features extends React.PureComponent {
         <h2>Custom Fonts</h2>
         <CustomFontElem>
           {'This project supports custom fonts.'}
-          <br />{'(Using "Indie Flower" from Google Fonts)'}
+          <br />
+          {'(Using "Indie Flower" from Google Fonts)'}
         </CustomFontElem>
         <h2>CSRF</h2>
-        <p dangerouslySetInnerHTML={{ __html: `Generated CSRF token is <code>${this.props.store.csrf}</code>. Tap on "${buttonLabel}" to test the token.` }} />
-        <button
-          onClick={evt => this.onTestCSRFToken(evt, true)}
-          disabled={!enableCSRFTest}
-        >{buttonLabel}</button>
-        {' '}
-        <button
-          onClick={evt => this.onTestCSRFToken(evt, false)}
-          disabled={!enableCSRFTest}
-        >{'Test without CSRF token'}</button>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: `Generated CSRF token is <code>${
+              this.props.store.csrf
+            }</code>. Tap on "${buttonLabel}" to test the token.`,
+          }}
+        />
+        <button onClick={evt => this.onTestCSRFToken(evt, true)} disabled={!enableCSRFTest}>
+          {buttonLabel}
+        </button>{' '}
+        <button onClick={evt => this.onTestCSRFToken(evt, false)} disabled={!enableCSRFTest}>
+          {'Test without CSRF token'}
+        </button>
         <pre>{JSON.stringify(this.props.store.csrfResponse)}</pre>
       </div>
     );
@@ -60,12 +64,8 @@ class Features extends React.PureComponent {
 }
 
 Features.propTypes = {
-  actions: PropTypes.oneOfType([
-    PropTypes.object,
-  ]).isRequired,
-  store: PropTypes.oneOfType([
-    PropTypes.object,
-  ]).isRequired,
+  actions: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  store: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
 
 export default connect(mapStateToProps('main'), bindActions(actions))(Features);

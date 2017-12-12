@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import staticAssets, { generateFontFace } from '../../client/utils/staticAssets';
 
-const inProductionMode = (process.env.NODE_ENV === 'production');
-const inDevelopmentMode = (process.env.NODE_ENV === 'development');
-const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true' && !inProductionMode);
-const enablePWA = (process.env.ENABLE_PWA_MODE === 'true');
+const inProductionMode = process.env.NODE_ENV === 'production';
+const inDevelopmentMode = process.env.NODE_ENV === 'development';
+const enableHMR = process.env.ENABLE_WEBPACK_HMR === 'true' && !inProductionMode;
+const enablePWA = process.env.ENABLE_PWA_MODE === 'true';
 const useBuildBundle = !(enableHMR || inDevelopmentMode);
-const disableJSBundle = (process.env.DISABLE_JS_BUNDLE === 'true');
+const disableJSBundle = process.env.DISABLE_JS_BUNDLE === 'true';
 
 function generatePreloadJS() {
   const bundles = [];
@@ -18,7 +18,7 @@ function generatePreloadJS() {
   let index = 0;
 
   if (!disableJSBundle && bundles.length > 0) {
-    return bundles.map((item) => {
+    return bundles.map(item => {
       index += 1;
       return (
         <link
@@ -38,7 +38,8 @@ function generateRegisterSWJS() {
   if (enablePWA) {
     return (
       <script
-        dangerouslySetInnerHTML={{ __html: `
+        dangerouslySetInnerHTML={{
+          __html: `
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', function () {
             navigator.serviceWorker.register('sw.js')
@@ -53,7 +54,8 @@ function generateRegisterSWJS() {
               });
           });
         }
-        ` }}
+        `,
+        }}
       />
     );
   }
@@ -62,15 +64,12 @@ function generateRegisterSWJS() {
 }
 
 function generateJSBundle() {
-  const bundles = [
-    'vendor',
-    'app',
-  ];
+  const bundles = ['vendor', 'app'];
 
   let index = 0;
 
   if (!disableJSBundle) {
-    return bundles.map((item) => {
+    return bundles.map(item => {
       index += 1;
       return (
         <script
@@ -99,12 +98,20 @@ const HTML = ({ content, styles, store, asyncState }) => (
       <title>Web Starter Kit</title>
       <link rel="icon" href={staticAssets.images.favicon} />
       <link rel="apple-touch-icon" href={staticAssets.images.favicon152} />
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic" />
+      <link
+        rel="stylesheet"
+        href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+      />
       <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css" />
-      <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css" />
+      <link
+        rel="stylesheet"
+        href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css"
+      />
       {generatePreloadJS()}
       <style dangerouslySetInnerHTML={{ __html: generateFontFace() }} />
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         html, body {
           height: 100%;
         }
@@ -112,15 +119,20 @@ const HTML = ({ content, styles, store, asyncState }) => (
         #mount {
           height: 100%;
         }
-      ` }}
+      `,
+        }}
       />
       {styles}
       <link rel="manifest" href={staticAssets.manifest} />
     </head>
     <body>
       <div id="mount" dangerouslySetInnerHTML={{ __html: content }} />
-      <script dangerouslySetInnerHTML={{ __html: `window.__preload__ = ${serialize(store.getState())};` }} />
-      <script dangerouslySetInnerHTML={{ __html: `window.__asyncState__ = ${serialize(asyncState)};` }} />
+      <script
+        dangerouslySetInnerHTML={{ __html: `window.__preload__ = ${serialize(store.getState())};` }}
+      />
+      <script
+        dangerouslySetInnerHTML={{ __html: `window.__asyncState__ = ${serialize(asyncState)};` }}
+      />
       {generateRegisterSWJS()}
       {generateJSBundle()}
     </body>
@@ -134,15 +146,9 @@ HTML.defaultProps = {
 
 HTML.propTypes = {
   content: PropTypes.string,
-  store: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object,
-  ]).isRequired,
+  store: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   styles: PropTypes.arrayOf(PropTypes.element),
-  asyncState: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object,
-  ]).isRequired,
+  asyncState: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
 };
 
 export default HTML;

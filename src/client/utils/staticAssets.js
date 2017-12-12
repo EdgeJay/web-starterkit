@@ -37,16 +37,19 @@ export function generateFontFace() {
     return '';
   }
 
-  const arr = Object.keys(staticAssets.fonts).map(fontName => (
-    Object.keys(staticAssets.fonts[fontName]).map(fontWeight => (
-      `@font-face {
+  const arr = Object.keys(staticAssets.fonts).map(fontName =>
+    Object.keys(staticAssets.fonts[fontName])
+      .map(
+        fontWeight =>
+          `@font-face {
         font-family: "${fontName}";
         src: url(${staticAssets.fonts[fontName][fontWeight].ttf});
         font-style: normal;
         font-weight: ${fontWeight};
       }`
-    )).join('\n')
-  ));
+      )
+      .join('\n')
+  );
 
   return arr.join('\n');
 }

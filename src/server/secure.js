@@ -11,16 +11,18 @@ function initSecurity(app) {
 
   app.use(helmet());
 
-  app.use(new CSRF({
-    invalidSessionSecretMessage: JSON.stringify({
-      validated: false,
-      error: 'Invalid session secret',
-    }),
-    invalidTokenMessage: JSON.stringify({
-      validated: false,
-      error: 'Invalid CSRF token',
-    }),
-  }));
+  app.use(
+    new CSRF({
+      invalidSessionSecretMessage: JSON.stringify({
+        validated: false,
+        error: 'Invalid session secret',
+      }),
+      invalidTokenMessage: JSON.stringify({
+        validated: false,
+        error: 'Invalid CSRF token',
+      }),
+    })
+  );
   app.use(async (ctx, next) => {
     // if method is not GET or POST
     if (!['GET', 'POST'].includes(ctx.method)) {

@@ -12,11 +12,11 @@ workbox.router.registerRoute(
     cacheExpiration: {
       maxEntries: 10,
     },
-    cacheableResponse: {statuses: [0, 200]},
-  }),
+    cacheableResponse: { statuses: [0, 200] },
+  })
 );
 
-self.addEventListener('push', function (evt) {
+self.addEventListener('push', function(evt) {
   const title = 'Welcome to Web Starter Kit';
   const options = {
     body: evt.data.text(),
@@ -24,7 +24,7 @@ self.addEventListener('push', function (evt) {
   evt.waitUntil(self.registration.showNotification(title, options));
 });
 
-self.addEventListener('fetch', function (evt) {
+self.addEventListener('fetch', function(evt) {
   console.log('Fetching: ' + evt.request.url);
 });
 

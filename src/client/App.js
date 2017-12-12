@@ -10,17 +10,9 @@ const App = props => (
 );
 
 App.propTypes = {
-  store: PropTypes.oneOfType([
-    PropTypes.object,
-  ]).isRequired,
-  history: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object,
-  ]).isRequired,
-  routes: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object,
-  ]).isRequired,
+  store: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  history: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  routes: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
 };
 
 export default App;

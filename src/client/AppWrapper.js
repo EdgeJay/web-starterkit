@@ -9,8 +9,8 @@ import { configureStore } from './stores';
 import renderRoutes from './utils/renderRoutes';
 import App from './App';
 
-const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true' &&
-  process.env.NODE_ENV !== 'production');
+const enableHMR =
+  process.env.ENABLE_WEBPACK_HMR === 'true' && process.env.NODE_ENV !== 'production';
 
 // eslint-disable-next-line dot-notation
 const store = configureStore(browserHistory, window['__preload__']);
@@ -24,26 +24,17 @@ const render = () => {
   // (refer to renderContent method in LandingController)
   let WrappedApp = (
     <AsyncComponentProvider rehydrateState={asyncState}>
-      <App
-        store={store}
-        history={history}
-        routes={routes}
-      />
+      <App store={store} history={history} routes={routes} />
     </AsyncComponentProvider>
   );
 
   if (enableHMR) {
-    WrappedApp = (
-      <AppContainer key={Math.random()}>{WrappedApp}</AppContainer>
-    );
+    WrappedApp = <AppContainer key={Math.random()}>{WrappedApp}</AppContainer>;
   }
 
   asyncBootstrapper(WrappedApp).then(() => {
     // render the app
-    ReactDOM.hydrate(
-      WrappedApp,
-      document.getElementById('mount'),
-    );
+    ReactDOM.hydrate(WrappedApp, document.getElementById('mount'));
   });
 };
 

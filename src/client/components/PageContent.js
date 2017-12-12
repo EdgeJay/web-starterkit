@@ -9,22 +9,17 @@ const ContentDiv = styled.div`
 
   ${media.tablet`
     padding-left: 33rem !important;
-  `}
+  `};
 `;
 
-const PageContent = props => (
-  <ContentDiv className="column">{props.children}</ContentDiv>
-);
+const PageContent = props => <ContentDiv className="column">{props.children}</ContentDiv>;
 
 PageContent.defaultProps = {
   children: <div />,
 };
 
 PageContent.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array,
-  ]),
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 export default PageContent;

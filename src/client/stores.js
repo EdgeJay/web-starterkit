@@ -30,13 +30,10 @@ export function configureStore(history, initialState) {
     return acc;
   }, {});
 
-  const store = createStore(reducer, preloadState,
-    compose(
-      applyMiddleware(
-        routerMiddleware(history),
-        thunk,
-      ),
-    ),
+  const store = createStore(
+    reducer,
+    preloadState,
+    compose(applyMiddleware(routerMiddleware(history), thunk))
   );
 
   return store;

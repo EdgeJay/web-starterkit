@@ -19,7 +19,7 @@ const Nav = styled.nav`
     top: 0;
     bottom: 0;
     left: 0;
-  `}
+  `};
 `;
 
 const NavMenu = styled.ul`
@@ -32,7 +32,7 @@ const NavMenu = styled.ul`
   ${media.tablet`
     text-align: left;
     padding: 0;
-  `}
+  `};
 `;
 
 const NavItem = styled.li`
@@ -42,7 +42,7 @@ const NavItem = styled.li`
 
   ${media.tablet`
     display: block;
-  `}
+  `};
 `;
 
 const NavLink = styled(Link)`
@@ -50,20 +50,21 @@ const NavLink = styled(Link)`
   color: #000;
   padding: 0.5rem 1rem;
 
-  &:hover, &.selected {
+  &:hover,
+  &.selected {
     color: #fff;
     background-color: gray;
   }
 `;
 
-const SideMenu = (props) => {
+const SideMenu = props => {
   const cx = classNames;
 
   const generateMenuItems = () => {
     const { menu } = props;
     let key = 0;
 
-    const items = menu.map((item) => {
+    const items = menu.map(item => {
       key += 1;
 
       // item.to can be a string or object
@@ -76,7 +77,9 @@ const SideMenu = (props) => {
 
       return (
         <NavItem key={key}>
-          <NavLink to={item.to} className={cx({ selected })}>{item.label}</NavLink>
+          <NavLink to={item.to} className={cx({ selected })}>
+            {item.label}
+          </NavLink>
         </NavItem>
       );
     });
@@ -96,9 +99,7 @@ SideMenu.defaultProps = {
 };
 
 SideMenu.propTypes = {
-  menu: PropTypes.arrayOf(
-    PropTypes.object,
-  ),
+  menu: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default withRouter(SideMenu);

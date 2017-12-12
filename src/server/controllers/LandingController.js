@@ -11,7 +11,7 @@ import { configureStore } from '../../client/stores';
 import HTML from '../utils/HTML';
 
 function renderContent({ store, history, routes, location }) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const sheet = new ServerStyleSheet();
 
     let content = '';
@@ -68,22 +68,19 @@ export default class LandingController {
     const store = configureStore(memoryHistory, initialState);
     const history = syncHistoryWithStore(memoryHistory, store);
 
-    const { error, redirectLocation, content, styles, asyncState } =
-      await renderContent({ store, history, routes, location });
+    const { error, redirectLocation, content, styles, asyncState } = await renderContent({
+      store,
+      history,
+      routes,
+      location,
+    });
 
     if (error) {
       ctx.status = 500;
     } else if (redirectLocation) {
       ctx.redirect(redirectLocation.pathname + redirectLocation.search);
     } else {
-      const html = (
-        <HTML
-          content={content}
-          styles={styles}
-          store={store}
-          asyncState={asyncState}
-        />
-      );
+      const html = <HTML content={content} styles={styles} store={store} asyncState={asyncState} />;
 
       ctx.body = renderToStaticNodeStream(html);
       ctx.type = 'html';

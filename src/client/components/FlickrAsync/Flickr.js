@@ -7,12 +7,12 @@ import * as actions from '../../actions/main';
 import PageHeader from '../PageHeader';
 
 const Row = styled.div`
-flex-wrap: wrap;
+  flex-wrap: wrap;
 
-.column {
-  margin-top: 0.625rem;
-  text-align: center;
-}
+  .column {
+    margin-top: 0.625rem;
+    text-align: center;
+  }
 `;
 
 function generateImageUrl({ id, farm, secret, server }) {
@@ -36,8 +36,8 @@ class Flickr extends React.Component {
         <PageHeader>Flickr</PageHeader>
         <p>This page demonstrates how caching of Flickr data and images work in PWA.</p>
         <div className="container">
-          <Row className="row">{
-            results.map((item) => {
+          <Row className="row">
+            {results.map(item => {
               key += 1;
 
               return (
@@ -45,8 +45,8 @@ class Flickr extends React.Component {
                   <img src={generateImageUrl(item)} alt={item.title} title={item.title} />
                 </div>
               );
-            })
-          }</Row>
+            })}
+          </Row>
         </div>
       </div>
     );
@@ -54,12 +54,8 @@ class Flickr extends React.Component {
 }
 
 Flickr.propTypes = {
-  actions: PropTypes.oneOfType([
-    PropTypes.object,
-  ]).isRequired,
-  store: PropTypes.oneOfType([
-    PropTypes.object,
-  ]).isRequired,
+  actions: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  store: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
 
 export default connect(mapStateToProps('main'), bindActions(actions))(Flickr);

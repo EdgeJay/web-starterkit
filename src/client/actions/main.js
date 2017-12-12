@@ -24,7 +24,7 @@ function validatedCSRF(response) {
 }
 
 export function validateCSRF(payload) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(validatingCSRF());
 
     Api.post({
@@ -35,7 +35,7 @@ export function validateCSRF(payload) {
       payload,
     })
       .then(response => response.json())
-      .then((response) => {
+      .then(response => {
         dispatch(validatedCSRF(response));
       });
   };
@@ -55,7 +55,7 @@ function fetchedFlickrRecents(response) {
 }
 
 export function fetchFlickrRecents() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(fetchingFlickrRecents());
 
     const url = '/flickr-recents?per_page=12&page=1';

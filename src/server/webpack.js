@@ -14,16 +14,20 @@ function initWebpack(app) {
 
   // add devMiddleware to add webpacking capabilities to Koa server app
   // (instead of having a separate webpack-dev-server)
-  app.use(devMiddleware(compiled, {
-    publicPath: clientConfig.output.publicPath,
-    stats: {
-      colors: true,
-    },
-  }));
+  app.use(
+    devMiddleware(compiled, {
+      publicPath: clientConfig.output.publicPath,
+      stats: {
+        colors: true,
+      },
+    })
+  );
 
-  app.use(hotMiddleware(compiled, {
-    log: console.log, // eslint-disable-line
-  }));
+  app.use(
+    hotMiddleware(compiled, {
+      log: console.log, // eslint-disable-line
+    })
+  );
 }
 
 module.exports = { initWebpack };

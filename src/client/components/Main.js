@@ -9,28 +9,36 @@ import PageContent from './PageContent';
 
 class Main extends React.PureComponent {
   render() {
-    const menu = [{
-      to: { pathname: '/' },
-      label: 'Home',
-    }, {
-      to: { pathname: '/about' },
-      label: 'About this repo',
-    }, {
-      to: { pathname: '/features' },
-      label: 'Features',
-    }, {
-      to: { pathname: '/flickr' },
-      label: 'Flickr',
-    }, {
-      to: '/libraries',
-      label: 'Libraries',
-    }, {
-      to: '/extend',
-      label: 'How to extend from this repo',
-    }, {
-      to: '/contact',
-      label: 'Contact',
-    }];
+    const menu = [
+      {
+        to: { pathname: '/' },
+        label: 'Home',
+      },
+      {
+        to: { pathname: '/about' },
+        label: 'About this repo',
+      },
+      {
+        to: { pathname: '/features' },
+        label: 'Features',
+      },
+      {
+        to: { pathname: '/flickr' },
+        label: 'Flickr',
+      },
+      {
+        to: '/libraries',
+        label: 'Libraries',
+      },
+      {
+        to: '/extend',
+        label: 'How to extend from this repo',
+      },
+      {
+        to: '/contact',
+        label: 'Contact',
+      },
+    ];
 
     return (
       <Page>
@@ -46,10 +54,7 @@ Main.defaultProps = {
 };
 
 Main.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array,
-  ]),
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 export default connect(mapStateToProps('main'), bindActions(actions))(Main);
