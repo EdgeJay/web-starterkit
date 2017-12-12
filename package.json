@@ -3,16 +3,21 @@
   "version": "0.5.0",
   "description": "Template project to kickstart new web projects",
   "scripts": {
-    "build:html": "curl localhost:6150 -o ./src/client/assets/index.html",
     "build:sw": "cp ./node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js ./dist",
     "build:analyse": "ANALYSE_BUILD_MODE=true NODE_ENV=production ./node_modules/.bin/webpack",
+    "build:dev": "chmod +x ./scripts/build.dev.sh && ./scripts/build.dev.sh",
     "build": "chmod +x ./scripts/build.sh && ./scripts/build.sh",
     "dev:server": "nodemon -L",
+    "lint": "eslint -c ./.eslintrc.js \"./src/**/*.js\"",
     "lint:server": "eslint -c ./.eslintrc.js ./index.js \"./src/server/**\"",
+    "prettier": "prettier --write \"./index.js\" \"./src/**/*.js\"",
+    "test": "npm run lint && ava",
+    "test:report": "ava --tap | tee ava.tap | tap-spec",
+    "test:convert": "cat ava.tap | tap-xunit > ava.xml",
+    "test:coverage": "nyc --reporter=cobertura --reporter=text ava",
     "start": "node --harmony index.js",
     "preinstall": "chmod +x ./scripts/preinstall.sh && ./scripts/preinstall.sh",
-    "postinstall": "chmod +x ./scripts/postinstall.sh && ./scripts/postinstall.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "chmod +x ./scripts/postinstall.sh && ./scripts/postinstall.sh"
   },
   "engines": {
     "node": "8.9.3"
@@ -44,6 +49,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "classnames": "^2.2.5",
+    "debug": "^3.1.0",
     "dotenv": "^4.0.0",
     "dustjs-linkedin": "^2.7.5",
     "fetch-ponyfill": "^4.1.0",
@@ -71,26 +77,43 @@
     "workbox-sw": "^2.1.2"
   },
   "devDependencies": {
+    "ava": "0.22.0",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.0",
     "babel-loader": "^7.1.2",
     "babel-minify-webpack-plugin": "^0.2.0",
     "compression-webpack-plugin": "^1.0.1",
     "eslint": "^4.7.2",
     "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-standard": "^3.0.1",
     "file-loader": "^0.11.2",
     "koa-webpack-middleware": "^1.0.7",
     "nodemon": "^1.12.1",
+    "nyc": "^11.3.0",
+    "prettier": "^1.9.1",
     "react-hot-loader": "^3.0.0-beta.7",
+    "redux-logger": "^3.0.6",
+    "tap-spec": "4.1.1",
+    "tap-xunit": "1.7.0",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.8.2",
     "webpack-hot-middleware": "^2.19.1",
     "workbox-webpack-plugin": "^2.1.2"
+  },
+  "ava": {
+    "files": [
+        "**/*.test.js"
+      ],
+      "require": "babel-register",
+      "babel": "inherit"
   }
 }
