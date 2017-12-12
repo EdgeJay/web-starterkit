@@ -6,11 +6,11 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const analyseBuildMode = (process.env.ANALYSE_BUILD_MODE === 'true');
-const inProductionMode = (process.env.NODE_ENV === 'production');
-const inDevelopmentMode = (process.env.NODE_ENV === 'development');
-const enablePWA = (process.env.ENABLE_PWA_MODE === 'true');
-const enableHMR = (process.env.ENABLE_WEBPACK_HMR === 'true' && !inProductionMode);
+const analyseBuildMode = process.env.ANALYSE_BUILD_MODE === 'true';
+const inProductionMode = process.env.NODE_ENV === 'production';
+const inDevelopmentMode = process.env.NODE_ENV === 'development';
+const enablePWA = process.env.ENABLE_PWA_MODE === 'true';
+const enableHMR = process.env.ENABLE_WEBPACK_HMR === 'true' && !inProductionMode;
 
 const envVars = ['NODE_ENV', 'ENABLE_PWA_MODE', 'ENABLE_WEBPACK_HMR', 'ENABLE_SERVE_DIST'];
 
@@ -60,9 +60,12 @@ function generateEntry() {
 
 function generateBabelPlugins() {
   const babelPlugins = [
-    ['styled-components', {
-      ssr: true,
-    }],
+    [
+      'styled-components',
+      {
+        ssr: true,
+      },
+    ],
     'transform-react-jsx',
     'transform-runtime',
     'transform-es2015-spread',
@@ -80,7 +83,7 @@ function generateWebpackPlugins() {
   const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
   });
-  
+
   const workboxPlugin = new WorkboxPlugin({
     globDirectory: path.resolve(outputPath, '../'),
     globPatterns: ['**/*.{html,js,gif,png,jpg,jpeg,svg,otf,ttf,json,ico}'],
@@ -123,10 +126,12 @@ function generateWebpackPlugins() {
   }
 
   if (analyseBuildMode) {
-    plugins.push(new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      reportFilename: '../../reports/webpack/report.html',
-    }));
+    plugins.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        reportFilename: '../../reports/webpack/report.html',
+      })
+    );
   }
 
   return plugins;
@@ -142,45 +147,51 @@ const clientConfig = {
     publicPath: '/assets/',
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      loader: 'eslint-loader',
-      enforce: 'pre',
-      include: [path.resolve(__dirname, './src/client')],
-      options: {
-        configFile: './.eslintrc.js',
-        formatter: require('eslint-friendly-formatter')
-      }
-    }, {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [path.resolve(__dirname, './src/client')],
         options: {
-          presets: [
-            ['env', {
-              targets: {
-                browsers: [
-                  'last 2 versions',
-                ],
-              },
-              modules: false,
-            }],
-            'react',
-          ],
-          plugins: generateBabelPlugins(),
-        },
-      }
-    }, {
-      test: /\.(html|ico|png|jpg|jpeg|svg|gif|otf|ttf|json)$/,
-      use: {
-        loader: 'file-loader',
-        options: {
-          context: path.resolve(__dirname, 'src/client/assets'),
-          name: '[path][name].[ext]',
+          configFile: './.eslintrc.js',
+          formatter: require('eslint-friendly-formatter'),
         },
       },
-    }]
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            presets: [
+              [
+                'env',
+                {
+                  targets: {
+                    browsers: ['last 2 versions'],
+                  },
+                  modules: false,
+                },
+              ],
+              'react',
+            ],
+            plugins: generateBabelPlugins(),
+          },
+        },
+      },
+      {
+        test: /\.(html|ico|png|jpg|jpeg|svg|gif|otf|ttf|json)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            context: path.resolve(__dirname, 'src/client/assets'),
+            name: '[path][name].[ext]',
+          },
+        },
+      },
+    ],
   },
   plugins: generateWebpackPlugins(),
 };
