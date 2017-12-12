@@ -13,7 +13,7 @@ export default function renderRoutes() {
   return (
     <Route path="/" component={Main}>
       <IndexRoute component={Home} />
-      <Route path="index.html" component={Home} />
+      <Route path="app-shell.html" component={Home} />
       <Route path="about" component={About} />
       <Route path="features" component={Features} />
       <Route path="flickr" component={Flickr} />
