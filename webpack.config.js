@@ -103,6 +103,7 @@ function generateWebpackPlugins() {
       new CompressionPlugin(),
     ];
   } else {
+    // eslint-disable-next-line
     if (enableHMR) {
       plugins = [
         new webpack.EnvironmentPlugin(envVars),
