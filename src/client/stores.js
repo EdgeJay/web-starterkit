@@ -19,7 +19,7 @@ export function configureStore(history, initialState) {
   }
 
   const store = createStore(
-    reducer,
+    reducers,
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
   );
