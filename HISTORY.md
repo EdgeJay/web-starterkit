@@ -1,3 +1,9 @@
+### v0.7.0 / 12 Dec 2017
+    * Creation of app shell html file is now done on the fly, thus removing need to create app shell prior to server deployment
+    * Add prettier for code formatting
+    * Better logging using `debug` module
+    * Add ava as test runner
+
 ### v0.5.0 / 6 Dec 2017
     * Disable loading React components asynchronously if hot module reloading is enabled
 

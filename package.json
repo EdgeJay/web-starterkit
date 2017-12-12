@@ -1,6 +1,6 @@
 {
   "name": "web-starterkit",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "description": "Template project to kickstart new web projects",
   "scripts": {
     "build:sw": "cp ./node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js ./dist",
