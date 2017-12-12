@@ -26,7 +26,7 @@
       "sizes": "512x512",
       "type": "image/png"
     }],
-  "start_url": "/index.html",
+  "start_url": "/app-shell.html",
   "display": "standalone",
   "background_color": "#e8eaf9",
   "theme_color": "#4858ea"
