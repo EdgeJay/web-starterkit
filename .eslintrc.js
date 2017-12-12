@@ -5,15 +5,11 @@ module.exports = {
     ecmaVersion: 7,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
   },
-  extends: ['airbnb', 'plugin:react/recommended'],
-  plugins: [
-    'react',
-    'jsx-a11y',
-    'import',
-  ],
+  extends: ['airbnb', 'prettier', 'prettier/react', 'prettier/standard'],
+  plugins: [		+  plugins: ['react', 'prettier', 'jsx-a11y', 'import'],
   env: {
     browser: true,
     node: true,
@@ -22,12 +18,18 @@ module.exports = {
   // add your custom rules here
   rules: {
     // allow optionalDependencies
-    'import/no-extraneous-dependencies': ['error', {
-      'devDependencies': true,
-    }],
-    'react/jsx-filename-extension': [1, {
-      'extensions': ['.js', '.jsx'],
-    }]
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+      },
+    ],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', '.jsx'],
+      },
+    ],
   },
 };
   
