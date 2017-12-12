@@ -1,3 +1,7 @@
+# ENABLE THE FOLLOWING LINE TO SHOW CONSOLE LOGGING
+# FOR MORE INFORMATION ON VALUES REFER TO https://www.npmjs.com/package/debug
+# DEBUG=server,landing
+
 NODE_ENV=development
 NODE_PORT=6150
 
