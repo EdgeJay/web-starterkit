@@ -9,7 +9,7 @@ module.exports = {
     },
   },
   extends: ['airbnb', 'prettier', 'prettier/react', 'prettier/standard'],
-  plugins: [		+  plugins: ['react', 'prettier', 'jsx-a11y', 'import'],
+  plugins: ['react', 'prettier', 'jsx-a11y', 'import'],
   env: {
     browser: true,
     node: true,
@@ -32,4 +32,3 @@ module.exports = {
     ],
   },
 };
-  
