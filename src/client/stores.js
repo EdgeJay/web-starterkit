@@ -1,39 +1,27 @@
-import { createStore, combineReducers, compose, applyMiddleware, bindActionCreators } from 'redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { createStore, compose, applyMiddleware, bindActionCreators } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
+import { logger } from 'redux-logger';
 import reducers from './reducers';
 
-const initial = {
-  main: {
-    title: 'Welcome to Web Starter Kit!',
-  },
-};
-
 export function configureStore(history, initialState) {
-  const reducer = combineReducers({
-    ...reducers,
-    routing: routerReducer,
-  });
+  const isNotProduction = process.env.NODE_ENV !== 'production';
+  const isFrontend = typeof window !== 'undefined' && window.document;
 
-  const preloadState = Object.keys(initial).reduce((acc, val) => {
-    if (!initialState[val]) {
-      acc[val] = {
-        ...initial[val],
-      };
-    } else {
-      acc[val] = {
-        ...initial[val],
-        ...initialState[val],
-      };
-    }
+  const middlewares = [routerMiddleware(history), thunk];
 
-    return acc;
-  }, {});
+  let composeEnhancers = compose;
+  if (isNotProduction && isFrontend) {
+    middlewares.push(logger);
+    // add redux devtools support in browser
+    // eslint-disable-next-line no-underscore-dangle
+    composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  }
 
   const store = createStore(
     reducer,
-    preloadState,
-    compose(applyMiddleware(routerMiddleware(history), thunk))
+    initialState,
+    composeEnhancers(applyMiddleware(...middlewares))
   );
 
   return store;

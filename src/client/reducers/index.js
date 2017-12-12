@@ -1,7 +1,10 @@
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 import main from './main';
 
-const reducers = {
+const reducer = combineReducers({
   main,
-};
+  routing: routerReducer,
+});
 
-export default reducers;
+export default reducer;
