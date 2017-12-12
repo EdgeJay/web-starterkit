@@ -1,13 +1,19 @@
+/* eslint-disable no-undef, no-console */
 importScripts('workbox-sw.prod.v2.1.2.js');
 
-const workbox = new WorkboxSW({
+const workboxSW = new WorkboxSW({
   skipWaiting: true,
   clientsClaim: true,
 });
 
-workbox.router.registerRoute(
+workboxSW.router.registerNavigationRoute('app-shell.html', {
+  whitelist: [/./],
+  blacklist: [],
+});
+
+workboxSW.router.registerRoute(
   /\/flickr-recents(\/?\?{0}|\/?\?{1}.*)$/,
-  workbox.strategies.cacheFirst({
+  workboxSW.strategies.cacheFirst({
     cacheName: 'flickr-cache',
     cacheExpiration: {
       maxEntries: 10,
@@ -16,7 +22,7 @@ workbox.router.registerRoute(
   })
 );
 
-self.addEventListener('push', function(evt) {
+self.addEventListener('push', evt => {
   const title = 'Welcome to Web Starter Kit';
   const options = {
     body: evt.data.text(),
@@ -24,10 +30,12 @@ self.addEventListener('push', function(evt) {
   evt.waitUntil(self.registration.showNotification(title, options));
 });
 
-self.addEventListener('fetch', function(evt) {
-  console.log('Fetching: ' + evt.request.url);
+self.addEventListener('fetch', evt => {
+  console.log(`Fetching: ${evt.request.url}`);
 });
+
+workboxSW.precache(['/app-shell.html']);
 
 // Do not remove! This is a placeholder keyword which Workbox injects
 // list of files to cache into the array.
-workbox.precache([]);
+workboxSW.precache([]);
