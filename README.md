@@ -57,3 +57,21 @@ Feel free to post issues or raise PRs if you found any bugs or areas that requir
 * Cached server-side rendering
 * React UI testing with [Enzyme](https://github.com/airbnb/enzyme)
 * Accelerated Mobile Pages (AMP)
+
+## Useful Visual Studio Code Plugins
+ - ESLint
+ - Git Lens
+ - Node.js Extension Pack
+ - Prettier - Code formatter
+ - Auto Close Tag
+ - Auto Rename Tag
+
+### Necessary VS Code Configurations
+
+Note that you might want those settings to be added in the workspace settings and not globally. (espeically the `editor.formatOnSave` part)
+
+    // Format a file on save. A formatter must be available, the file must not be auto-saved, and editor must not be shutting down.
+    "editor.formatOnSave": true,
+    // Enable/disable default JavaScript formatter (For Prettier)
+    "javascript.format.enable": false,
+    "editor.tabSize": 2,
