@@ -1,3 +1,5 @@
+# This repository has been archived to make way for [react-starter-kit](https://github.com/EdgeJay/react-starter-kit)
+
 # web-starterkit
 Template project to kickstart new web projects
 
